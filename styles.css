@@ -297,7 +297,7 @@ section {
 #skills {
     background-color: var(--white);
     border-radius:0 0 50px 50px;
-    height: 90vh;
+    height: 85vh;
 }
 
 #projects {
@@ -784,6 +784,7 @@ footer {
     }
     .happy-faces-bg {
         width: 60%;
+        transition: none;
     }
     #home h1 {
         text-align: center;
