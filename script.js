@@ -80,18 +80,19 @@ function getImageForProject(projectKey) {
 }
 
 window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
+  if (window.innerWidth <= 1500) return; // No hace nada en móviles (<=768px)
 
-    const parallaxSpeed = 1;     // Y movement
-    const scaleSpeed = 0.001;     // Shrinking
+  const scrolled = window.scrollY;
+  const parallaxSpeed = 1;
+  const scaleSpeed = 0.001;
 
-    const happyFaces = document.getElementById('happyFaces');
+  const happyFaces = document.getElementById('happyFaces');
+  const translateY = scrolled * parallaxSpeed;
+  const scale = Math.max(1 - scrolled * scaleSpeed, 0.5);
 
-    const translateY = scrolled * parallaxSpeed;
-    const scale = Math.max(1 - scrolled * scaleSpeed, 0.5);
-
-    happyFaces.style.transform = `translateY(${translateY}px) scale(${scale})`;
+  happyFaces.style.transform = `translateY(${translateY}px) scale(${scale})`;
 });
+
 
 const circle = document.getElementById("rollingFace");
 const about = document.getElementById("about");
