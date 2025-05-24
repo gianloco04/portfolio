@@ -754,6 +754,11 @@ footer {
     gap: 2rem;
 }
 
+.privacy-text {
+    line-height: 2rem;
+    width: 40%;
+}
+
 /* -------------------------------------------- Mobile --------------------------------------------------- */
 
 @media (max-width: 1500px) {
@@ -866,5 +871,8 @@ footer {
     footer p, footer a {
         font-size: 0.8rem;
         margin: 0;
+    }
+    .privacy-text {
+        width: 80%;
     }
 }
