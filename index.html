@@ -265,27 +265,41 @@
             <h1 class="white">CONTACT<br>FORM<img class="face face-contact" src="../4x/face-contact.png" alt=""></h1>
             <div class="forms flex center column">
             <!-- Contact Form -->
-            <form id="contact-form" action="send_mail.php" method="POST" class="contact-form flex column">
+            <form id="contact-form" action="https://formspree.io/f/mkgradaj" method="POST" class="contact-form flex column">
                 <div class="user-info flex">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
                 </div>
-                <input type="text" name="about" placeholder="The Subject" required>
+                <input type="text" name="subject" placeholder="The Subject" required>
                 <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-                <button type="submit" name="contact_submit">SEND</button>
+
+                <!-- Checkbox for privacy inside the form -->
+                <div class="privacy flex">
+                    <input type="checkbox" id="privacy-checkbox-contact" name="privacy-checkbox" required>
+                    <label class="flex" for="privacy-checkbox-contact">
+                    By clicking this box you agree to my 
+                    <a href="privacy.html" style="color: #ff4aa1;" target="_blank">privacy policy</a>
+                    </label>
+                </div>
+                <button type="submit">SEND</button>
             </form>
 
             <p class="or">OR</p>
 
             <!-- Newsletter Form -->
-            <form id="newsletter-form" action="send_mail.php" method="POST" class="contact-form flex column">
+            <form id="newsletter-form" action="https://formspree.io/f/tu_form_id" method="POST" class="contact-form flex column">
                 <input type="email" name="email" placeholder="Your Email" required>
-                <button type="submit" name="newsletter_submit">JOIN MY NEWSLETTER</button>
+
+                <!-- Checkbox for privacy inside the form -->
+                <div class="privacy flex">
+                <input type="checkbox" id="privacy-checkbox-newsletter" name="privacy-checkbox" required>
+                <label class="flex" for="privacy-checkbox-newsletter">
+                    By clicking this box you agree to my 
+                    <a href="privacy.html" style="color: #ff4aa1;" target="_blank">privacy policy</a>
+                </label>
+                </div>
+                <button type="submit">JOIN MY NEWSLETTER</button>
             </form>
-            <div class="privacy flex">
-                <input type="checkbox" id="privacy-checkbox" name="privacy-checkbox" required>
-                <label class="flex" for="privacy-checkbox">By clicking this box you agree to my <a href="privacy.html" style="color: #ff4aa1;" target="_blank">privacy policy</a></label>
-            </div>
             </div>
             <img class="bottom-face" src="../4x/face-about.png" alt="">
             <img id="rollingFace3" class="bottom-face-2" src="../4x/face-about-alt.png" alt="">
