@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Gianluca Cerchiai | Diseño Gráfico y Programación en Mallorca</title>
+    <meta name="description" content="Portfolio de Gianluca, diseño gráfico y programación en Mallorca. Conóceme a través de esta web y contacta si quieres hacer algo conmigo" />
+    <meta name="author" content="Gianluca Cerchiai" />
+    <link rel="icon" href="../4x/face-skills.png" type="image/x-icon" />
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Portfolio de Gianluca - Diseño y programación en Mallorca" />
+    <meta property="og:description" content="Conóceme a través de esta web y contacta si quieres hacer algo conmigo" />
+    <meta property="og:url" content="https://gianludesign.com/" />
+    <meta property="og:image" content="../4x/preview.jpg" />
+
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/vvm2cym.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1CBDSV1V0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-Q1CBDSV1V0');
+    </script>
+</head>
+<body>
+    <header class="flex fixed">
+        <img class="logo" src="../4x/gianluca-logo-bw.png" alt="my branding logo">
+        <div class="hamburger-container flex center" id="hamburger-btn">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar-Left -->
+    <aside class="sidebar-left flex center fixed" id="sidebar-left">
+        <img id="sidebar-left-img" src="../4x/gianluca-logo.png" alt="An image containing the logo I designed for the selected project">
+    </aside>
+
+    <!-- Sidebar-Right -->
+    <aside class="sidebar fixed" id="sidebar">
+        <div class="sidebar-tabs flex">
+            <button class="tab-btn active" data-tab="sections">SECTIONS</button>
+            <button class="tab-btn" data-tab="projects">PROJECTS</button>
+        </div>
+        <nav class="tab-content active" id="sections-tab">
+            <ul class="sidebar-menu">
+                <li data-text="HOME" style="--accent: #ff4aa1;" ><a href="#home">HOME</a></li>
+                <li data-text="ABOUT ME" style="--accent: #ffe448;"><a href="#about">ABOUT ME</a></li>
+                <li data-text="STUDIES & EXPERIENCE" style="--accent: #008ce2;"><a href="#studies">STUDIES & EXPERIENCE</a></li>
+                <li data-text="SKILLS & STUFF" style="--accent: #a973ff;"><a href="#skills">SKILLS & STUFF</a></li>
+                <li data-text="PROJECTS" style="--accent: #56ff5a;"><a href="#projects">PROJECTS</a></li>
+                <li data-text="BLOG" style="--accent: #ff9e3c;"><a href="#myblog">BLOG</a></li>
+                <li data-text="CONTACT" style="--accent: #212121;"><a href="#contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <nav class="tab-content" id="projects-tab">
+            <ul class="sidebar-menu">
+                <li data-text="ART JOVE 2023" style="--accent: #ffe448;" data-project="art-jove-2023">ART JOVE 2023</li>
+                <li data-text="ART JOVE 2025" style="--accent: #a973ff;" data-project="art-jove-2025">ART JOVE 2025</li>
+                <li data-text="MY FONT" style="--accent: #ff4aa1;" data-project="my-font">MY FONT</li>
+                <li data-text="MY APP" style="--accent: #56ff5a;" data-project="my-app">MY APP</li>
+                <li data-text="MY VIDEOGAME" style="--accent: #ff9e3c;" data-project="my-videogame">MY VIDEOGAME</li>
+                <li data-text="OTHER" style="--accent: #008ce2;" data-project="my-github">OTHER</li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main style="background: #a973ff;">
+        <!-- Home Section -->
+        <section id="home" class="section flex center">
+            <img class="happy-faces-bg fade-in" id="happyFaces" src="../4x/happy-faces-bg.png" loading="lazy" alt="A Background Containing Happy Faces floating around">
+            <h1 class="fade-in">GIANLU'S PROJECTS</h1>
+        </section>
+        <section></section>
+    </main>
+</body>
+<script src="script.js"></script>
+</html>
