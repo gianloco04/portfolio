@@ -171,11 +171,16 @@ const observer5 = new IntersectionObserver((entries, observer) => {
 
 observer5.observe(contact);
 
-
-
 const container = document.getElementById("scroll-container");
 const progressBar = document.getElementById("scroll-progress");
 
+// Listener para mover el scroll horizontal con la rueda del ratón
+container.addEventListener("wheel", (e) => {
+    e.preventDefault();  // evita el scroll vertical por defecto
+    container.scrollLeft += e.deltaY;  // mueve horizontalmente el scroll
+});
+
+// Listener para actualizar la barra de progreso cuando el contenedor se scrollea
 container.addEventListener("scroll", () => {
     const scrollWidth = container.scrollWidth - container.clientWidth;
     const scrollLeft = container.scrollLeft;

@@ -22,8 +22,6 @@ body {
     font-family: var(--neue);
     color: var(--black);
     background-color: var(--white);
-    overflow-x: hidden;
-
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 }
@@ -471,8 +469,8 @@ iframe {
 /* -------------------------------------------- SKILLS STYLES --------------------------------------------------- */
 
 .face-skills {
-    top: 52.5%;
-    left: 72.5%;
+    top: 5%;
+    left: 110%;
 }
 
 .skills-header {
@@ -526,27 +524,25 @@ iframe {
 
 .scroll-container-wrapper {
     margin-top: 8rem;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
+    width: 100%;
+    position: relative;
+    overflow: visible;
 }
 
 .scroll-container {
-  display: flex;
-  gap: 1.5rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding-bottom: 1rem;
-  scrollbar-width: none;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
 }
 .scroll-container::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .project-card {
-
-    justify-content: space-between;
-    min-height: 300px;
+    flex: 0 0 auto;
     min-width: 300px;
     width: 300px;
     background-color: var(--grey);
@@ -648,8 +644,8 @@ iframe {
 /* -------------------------------------------- CONTACT STYLES --------------------------------------------------- */
 
 .face-contact {
-    top: 52.5%;
-    left: 70%;
+    top: 5%;
+    left: 110%;
 }
 
 .forms {
