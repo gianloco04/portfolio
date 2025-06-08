@@ -24,6 +24,8 @@ body {
     background-color: var(--white);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
+    overflow-x: scroll;
+    scroll-snap-type: mandatory;
 }
 
 img {
@@ -273,7 +275,8 @@ section {
     position: relative;
     overflow: hidden;
     height: 100vh;
-    width: 100%;
+    width: 100vw;
+    scroll-snap-align: start;
 }
 
 .s-padding {
