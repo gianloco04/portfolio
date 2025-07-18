@@ -18,6 +18,9 @@
 
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="https://use.typekit.net/vvm2cym.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1CBDSV1V0"></script>
@@ -30,8 +33,9 @@
     </script>
 </head>
 <body>
+    <div data-scroll-container>
     <!-- Header-->
-    <header class="flex fixed">
+    <header class="flex fixed fade-in">
         <img class="logo" src="../4x/gianluca-logo-bw.png" alt="my branding logo">
         <div class="hamburger-container flex center" id="hamburger-btn">
             <div class="hamburger">
@@ -56,211 +60,54 @@
         <nav class="tab-content active" id="sections-tab">
             <ul class="sidebar-menu">
                 <li data-text="INICIO" style="--accent: #ff4aa1;" ><a href="#home">INICIO</a></li>
-                <li data-text="SOBRE MÍ" style="--accent: #ffe448;"><a href="#about">SOBRE MÍ</a></li>
-                <li data-text="ESTUDIOS Y EXPERIENCIA" style="--accent: #008ce2;"><a href="#studies">ESTUDIOS Y EXPERIENCIA</a></li>
-                <li data-text="HABILIDADES" style="--accent: #a973ff;"><a href="#skills">HABILIDADES</a></li>
-                <li data-text="PROYECTOS" style="--accent: #56ff5a;"><a href="#projects">PROYECTOS</a></li>
-                <li data-text="CONTACTO" style="--accent: #212121;"><a href="#contact">CONTACTO</a></li>
+                <li data-text="HABILIDADES" style="--accent: #a973ff;"><a href="#skills">SKILLS & INTERESTS</a></li>
+
             </ul>
         </nav>
         <nav class="tab-content" id="projects-tab">
             <ul class="sidebar-menu">
-                <li data-text="ART JOVE 2023" style="--accent: #ffe448;" data-project="art-jove-2023"><a href="#projects">ART JOVE 2023</a></li>
-                <li data-text="ART JOVE 2025" style="--accent: #a973ff;" data-project="art-jove-2025"><a href="#projects">ART JOVE 2025</a></li>
+                <li data-text="ART JOVE 2023" style="--accent: #ffe448;" data-project="art-jove-2023"><a href="#">ART JOVE 2023</a></li>
+                <li data-text="ART JOVE 2025" style="--accent: #a973ff;" data-project="art-jove-2025"><a href="#">ART JOVE 2025</a></li>
                 <li data-text="MI TIPOGRAFÍA" style="--accent: #ff4aa1;" data-project="my-font"><a href="https://ceresdesign.gumroad.com/l/ceresfont?_gl=1*1wdz3n4*_ga*MTI5Mzg5Nzg1Ny4xNzIwNzA3MjE5*_ga_6LJN6D94N6*czE3NDg1OTIwMzckbzIkZzEkdDE3NDg1OTMxNTkkajU5JGwwJGgw">MI TIPOGRAFÍA</a></li>
-                <li data-text="MI APP" style="--accent: #56ff5a;" data-project="my-app"><a href="#projects">MI APP</a></li>
-                <li data-text="MI VIDEOJUEGO" style="--accent: #ff9e3c;" data-project="my-videogame"><a href="#projects">MI VIDEOJUEGO</a></li>
-                <li data-text="OTROS" style="--accent: #008ce2;" data-project="my-github"><a href="#projects">OTROS</a></li>
+                <li data-text="CONTACTO" style="--accent: #212121;"><a href="#">CONTACTO</a></li>
             </ul>
         </nav>
     </aside>
 
     <!-- Main Content -->
-    <main style="background: #a973ff;">
+    <main style="background: #212121;">
         <!-- Home Section -->
-        <section id="home" class="section flex center">
+        <section id="home" class="flex center">
             <img class="happy-faces-bg fade-in" id="happyFaces" src="../4x/happy-faces-bg.png" loading="lazy" alt="A Background Containing Happy Faces floating around">
             <h1 class="fade-in">GIANLUCA CERCHIAI ESPALLARDO</h1>
         </section>
-        <!-- Other Sections-->
-        <section id="about" class="section flex start column s-padding">
-            <h1 class="white fade-in">SOBRE<br>MÍ<img class="face face-about" src="../4x/face-about.png" alt=""></h1>
-            <div class="about-title flex">
-              <div class="about-text">
-                    <p>¡Hey! Me llamo <strong class="about-strong">Gianluca.</strong><br><br>Tengo <strong class="about-strong">20 años</strong> y estoy estudiando y trabajando. En mi tiempo libre<strong class="about-strong">diseño y programo</strong> trabajando en proyectos personales. El área de los negocios que más me gusta es el <strong class="about-strong">branding y la experiencia de usuario</strong>, ya que es donde mejor se combinan mis habilidades <strong class="about-strong">creativas y analíticas.</strong><br><br> Vivo en <strong class="about-strong">Mallorca</strong> y hablo con fluidez cuatro idiomas: <strong class="about-strong">español, catalán, inglés e italiano.</strong><br><br>Gracias por tu tiempo, y espero que disfrutes mi página web. Si te gusta y quieres que te ayude con la tuya, ¡no dudes en ponerte en contacto!</p>
-              </div>
-                <iframe style="border-radius:20px" src="https://open.spotify.com/embed/playlist/4xeRC2HBFmJtiGS2TRrV9O?utm_source=generator&theme=0" width="50%" height="101%" frameBorder="0" allowfullscreen="1" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-
-            <img id="rollingFace" class="rolling-face" src="../4x/face-about.png" alt="">
+        <section id="interests" class="flex center">
+            <h1 style="color: var(--white);">SKILLS & INTERESTS</h1>
         </section>
-        <section id="studies" class="section flex end column s-padding">
-            <div class="studies-title">
-                <h1 class="fade-in">ESTUDIOS<br>Y EXPERIENCIA<img class="face face-studies" src="../4x/face-studies.png" alt=""></h1>
-                <button class="cv fade-in">DESCARGA MI CV</button>
-            </div>
-            <div class="studies-text flex start">
-                <p>Estoy estudiando un <strong class="studies-strong">Grado en Empresa y Tecnología</strong> en la UDIMA, que incluye asignaturas enfocadas en la gestión empresarial <strong class="studies-strong">(Contabilidad, Fiscalidad, Análisis de Datos...)</strong> así como otras centradas en el mundo digital<strong class="studies-strong"> (Programación, Diseño de Servicios, Tecnologías Disruptivas...)</strong>.<br><br>Al mismo tiempo, desde enero del año pasado, trabajo a tiempo parcial en <strong class="studies-strong">e3 Systems (Análisis de Datos y Facturación).</strong> Es una empresa que implementa y distribuye servicios de telecomunicaciones en el sector de los superyates.</p>
-            </div>
-            <img id="rollingFace2" class="rolling-face2" src="../4x/face-studies.png" alt="">
+        <section style="background-color: var(--white);" class="flex column center">
+            <div class="row flex center"><h2 style="color: #212121; font-size: 5rem;"><i style="color: #E34F26;" class="fa-brands fa-html5"></i>HTML<i class="fa-brands fa-css3-alt" style="color: #2965f1;"></i> CSS<i class="fa-brands fa-js" style="color: #ffd712 ;"></i> JAVASCRIPT<i class="fa-solid fa-database" style="color: #ff66d1; font-size: 4.5rem;"></i> SQL <i class="fa-brands fa-python" style="color: #306998;"></i>PYTHON</h2></div>
+            <div class="row flex center" style="margin: 4rem 0;"><h2 style="font-size: 5rem;"><img src="4x/adobe.png" alt="adobe logo" style="height: 6rem; display: inline-block; vertical-align: text-bottom;">ADOBE CREATIVE CLOUD<i class="fa-brands fa-figma" style="color: #ff66d1; font-size: 4.5rem;"></i>FIGMA<i class="fa-brands fa-microsoft" style="color: #0099D8; font-size: 4.25rem;"></i>MICROSOFT OFFICE</h2></div>
+            <div class="row flex center" style="margin-top: 4rem;"><h3>BRANDING</h3><h3>GRAPHIC DESIGN</h3><h3>PRODUCT DESIGN</h3><h3>EXPERIENCE MANAGEMENT</h3><h3>DATA ANALYSIS</h3></div>
         </section>
-        <section id="skills" class="section flex start column s-padding">
-            <h1>HABILIDADES<img class="face face-skills" src="face-skills.png" alt=""></h1>
-            <div class="skills-container">
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">HTML</span>
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">CSS</span>
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">JavaScript</span>
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">Python</span>
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">php</span>
-                <span class="skills-tag" style="background: #a973ff; color: var(--white); ">SQL</span>
-                <span class="skills-tag" style="background: #ff4aa1; color: var(--white); ">Illustrator</span>
-                <span class="skills-tag" style="background: #ff4aa1; color: var(--white); ">Creative Cloud</span>
-                <span class="skills-tag" style="background: #ff4aa1; color: var(--white); ">Figma</span>
-                <span class="skills-tag" style="background: #008ce2; color: var(--white); ">Microsoft Office</span>
-                <span class="skills-tag" style="background: #008ce2; color: var(--white); ">Business Central</span>
-                <span class="skills-tag" style="background: #008ce2; color: var(--white); ">Dynamics Navision</span>
-                <a href="https://www.notion.com/" target="_blank" class="skills-tag" style="background:var(--black); color: var(--white); ">Notion</a>
-                <a href="https://www.awwwards.com/" target="_blank" class="skills-tag" style="background: var(--black); color: var(--white); ">Awwwards</a>
-                <a href="https://www.behance.com/" target="_blank" class="skills-tag" style="background: var(--black); color: var(--white); ">Behance</a>
-                <a href="https://www.producthunt.com/" target="_blank" class="skills-tag" style="background: var(--black); color: var(--white); ">Product Hunt</a>
-                <a href="https://www.vercel.com/" target="_blank" class="skills-tag" style="background: var(--black); color: var(--white); ">Vercel | V0</a>
-            </div>
-            <div class="legend">
-                <div class="legend-item">
-                    <span class="dot" style="background-color: #a973ff;"></span>
-                    <span class="label2">Lenguajes de Programación</span>
-                </div>
-                <div class="legend-item">
-                    <span class="dot" style="background-color: #ff4aa1;"></span>
-                    <span class="label2">Diseño Gráfico</span>
-                </div>
-                <div class="legend-item">
-                    <span class="dot" style="background-color: #008ce2;"></span>
-                    <span class="label2">Herramientas de Oficina</span>
-                </div>
-                <div class="legend-item">
-                    <span class="dot" style="background-color: var(--black);"></span>
-                    <span class="label2">Herramientas que uso</span>
-                </div>
-            </div>
+        <section id="gallery" class="flex center">
+            <h1 style="color: var(--white);">GALLERY</h1>
         </section>
-        <section id="projects" class="section flex end column s-padding">
-            <h1>PROJECTS<img class="face face-projects" src="../4x/face-projects.png" alt=""></h1>
-            <div class="scroll-container-wrapper">
-                <div class="scroll-container" id="scroll-container">
-                    <!-- Example project cards -->
-                    <div class="project-card flex column">
-                        <h3 class="project-title">ART JOVE 2023</h3>
-                        <p class="project-description">
-                            Llegué a la ronda final de un concurso de diseño para personas de entre 18 y 35 años. El proyecto fue una gran oportunidad para demostrar mis habilidades autodidactas mientras competía contra otros diseñadores talentosos.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #56ff5a; color: var(--black); ">ACABADO</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO GRÁFICO</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">ART JOVE 2025</h3>
-                        <p class="project-description">
-                            Acabo de unirme a la edición de este año para obtener un mejor resultado que la última vez. Me siento más preparado y seguro de mis habilidades, y estoy emocionado por ver cómo evoluciona mi diseño. Finaliza en septiembre de 2025.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #ffe448; color: var(--black);">EN MARCHA</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO GRÁFICO</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">MI TIPOGRAFÍA</h3>
-                        <p class="project-description">
-                                Empecé a diseñar esta tipografía para la edición 2023 de Art Jove, pero terminé de crear todos los caracteres en 2024. La he publicado en una plataforma de recursos gráficos llamada Gumroad.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #56ff5a; color: var(--black);">ACABADO</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO GRÁFICO</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">MI WEB</h3>
-                        <p class="project-description">
-                            ¡Si estás leyendo esto, ya estás en mi página web! La diseñé y programé desde cero, usando HTML, CSS y JavaScript. Quise crear un diseño simple y limpio que reflejara mi estilo y personalidad, he hecho la base y poco a poco iré mejorándola.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #56ff5a; color: var(--black);">ACABADO</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO GRÁFICO</span>
-                            <span class="tag" style="background: #a973ff; color: var(--white);">PROGRAMACIÓN</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">MI APP</h3>
-                        <p class="project-description">
-                            Todavía estoy conceptualizando este proyecto. Quiero desarrollar una aplicación web que permita a marcas de todo tipo gestionar su branding y mantener un registro de sus diseños. Esto les ayudará a mantener una identidad de marca consistente y en evolución, tanto dentro como fuera de la empresa.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #ff9e3c; color: var(--black);">PLANEADO</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO</span>
-                            <span class="tag" style="background: #a973ff; color: var(--white);">PROGRAMACIÓN</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">MI VIDEOJUEGO</h3>
-                        <p class="project-description">
-                            Un videojuego con estilo Pixel Art en el que gestionarás una panadería en Mallorca. Priorizaré el apartado artístico y la historia, que será fiel a la cultura y las tradiciones de la isla.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag" style="background: #ff9e3c; color: var(--black);">PLANEADO</span>
-                            <span class="tag" style="background: #ff4aa1; color: var(--white);">DISEÑO</span>
-                            <span class="tag" style="background: #a973ff; color: var(--white);">PROGRAMACIÓN</span>
-                        </div>
-                    </div>
-                    <div class="project-card flex column">
-                        <h3 class="project-title">OTROS</h3>
-                        <p class="project-description">
-                            Algunos diseños y trabajos más que he creado en los últimos años, incluyendo algunos logotipos, páginas web sencillas e ilustraciones en pixel art.
-                        </p>
-                    </div>
-                </div>
-                <div class="scroll-indicator">
-                    <div class="scroll-progress" id="scroll-progress"></div>
-                </div>
-            </div>
+        <section style="background-color: var(--white);"></section>
+        <section id="contact" class="flex center">
+            <h1 style="color: var(--white);">PRESENCE</h1>
         </section>
-
-        <section id="contact" class="section flex start s-padding">
-            <h1 class="white">CONTACTA<img class="face face-contact" src="../4x/face-contact.png" alt=""></h1>
-            <div class="forms flex center column">
-            <!-- Contact Form -->
-            <form id="contact-form" action="https://formspree.io/f/mkgradaj" method="POST" class="contact-form flex column">
-                <div class="user-info flex">
-                    <input type="text" name="name" placeholder="Nombre" required>
-                    <input type="email" name="email" placeholder="Correo" required>
-                </div>
-                <input type="text" name="subject" placeholder="Sobre..." required>
-                <textarea name="message" rows="5" placeholder="Tu Mensaje" required></textarea>
-
-                <!-- Checkbox for privacy inside the form -->
-                <div class="privacy flex">
-                    <input type="checkbox" id="privacy-checkbox-contact" name="privacy-checkbox" required>
-                    <label class="flex" for="privacy-checkbox-contact">
-                    Al hacer clic en esta casilla, aceptas mi
-                    <a href="privacy.html" style="color: #ff4aa1;" target="_blank">política de privacidad</a>
-                    </label>
-                </div>
-                <button type="submit">ENVIAR</button>
-            </form>
-            </div>
-            <img class="bottom-face" src="../4x/face-about.png" alt="">
-            <img id="rollingFace3" class="bottom-face-2" src="../4x/face-about-alt.png" alt="">
-        </section>
+        <section style="background-color: var(--white);"></section></section>
     </main>
-
-    <!-- Footer -->
-    <footer class="flex center">
-        <p style="color: var(--grey);">&copy; 2025 Gianluca Cerchiai Espallardo. Todos los derechos reservados.</p>
-        <a href="info@ceresdesigns.com">info@ceresdesigns.com</a>
-        <a href="tel:+34637805315">+34 637 805 315</a>
-        <p style="color: var(--grey)";>Disponible en Palma, Mallorca — presencial y online</p>
-    </footer>
-
     <script src="../script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+    <script>
+    const scroll = new LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        inertia: 0.5 // menor = más lenta y prolongada la animación (0.05–0.3 es ideal)
+    });
+    </script>
+
+    </div>
 </body>
 </html>
