@@ -53,23 +53,14 @@
 
     <!-- Sidebar-Right -->
     <aside class="sidebar fixed" id="sidebar">
-        <div class="sidebar-tabs flex">
-            <button class="tab-btn active" data-tab="sections">SECCIONES</button>
-            <button class="tab-btn" data-tab="projects">PROYECTOS</button>
-        </div>
         <nav class="tab-content active" id="sections-tab">
             <ul class="sidebar-menu">
-                <li data-text="INICIO" style="--accent: #ff4aa1;" ><a href="#home">INICIO</a></li>
-                <li data-text="HABILIDADES" style="--accent: #a973ff;"><a href="#skills">SKILLS & INTERESTS</a></li>
-
-            </ul>
-        </nav>
-        <nav class="tab-content" id="projects-tab">
-            <ul class="sidebar-menu">
-                <li data-text="ART JOVE 2023" style="--accent: #ffe448;" data-project="art-jove-2023"><a href="#">ART JOVE 2023</a></li>
-                <li data-text="ART JOVE 2025" style="--accent: #a973ff;" data-project="art-jove-2025"><a href="#">ART JOVE 2025</a></li>
-                <li data-text="MI TIPOGRAFÍA" style="--accent: #ff4aa1;" data-project="my-font"><a href="https://ceresdesign.gumroad.com/l/ceresfont?_gl=1*1wdz3n4*_ga*MTI5Mzg5Nzg1Ny4xNzIwNzA3MjE5*_ga_6LJN6D94N6*czE3NDg1OTIwMzckbzIkZzEkdDE3NDg1OTMxNTkkajU5JGwwJGgw">MI TIPOGRAFÍA</a></li>
-                <li data-text="CONTACTO" style="--accent: #212121;"><a href="#">CONTACTO</a></li>
+                <li data-text="HOME" style="--accent: #ff4aa1;"  data-project="home" ><a href="#home">HOME</a></li>
+                <li data-text="SKILLS & INTERESTS" style="--accent: #a973ff;"  data-project="home"><a href="#skills">SKILLS & INTERESTS</a></li>
+                <li data-text="DESIGN CONTEST 2023" style="--accent: #ffe448;" data-project="art-jove-2023"><a href="#">DESIGN CONTEST 2023</a></li>
+                <li data-text="DESIGN CONTEST 2025" style="--accent: #a973ff;" data-project="art-jove-2025"><a href="#">DESIGN CONTEST 2025</a></li>
+                <li data-text="MY FONT" style="--accent: #ff4aa1;" data-project="my-font"><a href="https://ceresdesign.gumroad.com/l/ceresfont?_gl=1*1wdz3n4*_ga*MTI5Mzg5Nzg1Ny4xNzIwNzA3MjE5*_ga_6LJN6D94N6*czE3NDg1OTIwMzckbzIkZzEkdDE3NDg1OTMxNTkkajU5JGwwJGgw">MY FONT</a></li>
+                <li data-text="CONTACTO" style="--accent: #212121;"  data-project="home"><a href="#">CONTACT</a></li>
             </ul>
         </nav>
     </aside>
@@ -84,15 +75,22 @@
         <section id="interests" class="flex center">
             <h1 style="color: var(--white);">SKILLS & INTERESTS</h1>
         </section>
-        <section style="background-color: var(--white);" class="flex column center">
+        <section id="skills" style="background-color: var(--white);" class="flex column center">
             <div class="row flex center"><h2 style="color: #212121; font-size: 5rem;"><i style="color: #E34F26;" class="fa-brands fa-html5"></i>HTML<i class="fa-brands fa-css3-alt" style="color: #2965f1;"></i> CSS<i class="fa-brands fa-js" style="color: #ffd712 ;"></i> JAVASCRIPT<i class="fa-solid fa-database" style="color: #ff66d1; font-size: 4.5rem;"></i> SQL <i class="fa-brands fa-python" style="color: #306998;"></i>PYTHON</h2></div>
-            <div class="row flex center" style="margin: 4rem 0;"><h2 style="font-size: 5rem;"><img src="4x/adobe.png" alt="adobe logo" style="height: 6rem; display: inline-block; vertical-align: text-bottom;">ADOBE CREATIVE CLOUD<i class="fa-brands fa-figma" style="color: #ff66d1; font-size: 4.5rem;"></i>FIGMA<i class="fa-brands fa-microsoft" style="color: #0099D8; font-size: 4.25rem;"></i>MICROSOFT OFFICE</h2></div>
+            <div class="row flex center" style="margin: 4rem 0;"><h2 style="font-size: 5rem;"><img src="4x/adobe.png" alt="adobe logo" style="height: 6rem; display: inline-block; vertical-align: text-bottom;">ADOBE CREATIVE CLOUD<i class="fa-brands fa-figma" style="color: #ff66d1; font-size: 4.5rem;"></i>FIGMA</h2></div>
+            <div class="row flex center"><h2 style="font-size: 5rem;"><i class="fa-brands fa-microsoft" style="color: #0099D8; font-size: 4.25rem;"></i>MICROSOFT OFFICE<i class="fa-brands fa-microsoft" style="color: #0099D8; font-size: 4.25rem;"></i>BUSINESS CENTRAL</h2></div>
             <div class="row flex center" style="margin-top: 4rem;"><h3>BRANDING</h3><h3>GRAPHIC DESIGN</h3><h3>PRODUCT DESIGN</h3><h3>EXPERIENCE MANAGEMENT</h3><h3>DATA ANALYSIS</h3></div>
         </section>
         <section id="gallery" class="flex center">
             <h1 style="color: var(--white);">GALLERY</h1>
         </section>
-        <section style="background-color: var(--white);"></section>
+        <section style="background-color: var(--white);">
+            <div class="images">
+                <img src="image1.jpg" alt="Image 1">
+                <img src="image2.jpg" alt="Image 2">
+                <img src="image3.jpg" alt="Image 3">
+            </div>
+        </section>
         <section id="contact" class="flex center">
             <h1 style="color: var(--white);">PRESENCE</h1>
         </section>

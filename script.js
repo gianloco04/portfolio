@@ -74,6 +74,7 @@ function getImageForProject(projectKey) {
         'my-app': '../4x/gianluca-app.png',
         'art-jove-2025': '../4x/gianluca-artjove25.png',
         'my-videogame': '../4x/gianluca-videogame.png',
+        'home': '../4x/gianluca-logo.png'
 
     };
     return images[projectKey] || '';

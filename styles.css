@@ -209,27 +209,6 @@ header {
     right: 0;
 }
 
-.sidebar-tabs {
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.tab-btn {
-    font-family: var(--acumin);
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    padding: 0.5rem 1rem;
-    transition: var(--transition);
-    color: var(--black);
-}
-
-.tab-btn.active {
-    background-color: var(--black);
-    color: var(--white);
-    border-radius: 20px ;
-}
-
 .tab-content {
     display: none;
 }
@@ -331,13 +310,54 @@ h3 {
     font-size: 2rem;
 }
 
+/* -------------------------------------------- GALLERY STYLES ------------------------------------------------- */
+
+.images {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* or any fixed height you want */
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+.images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.images img:nth-child(1) {
+    opacity: 1;
+}
+.images img:nth-child(2) {
+    opacity: 0;
+    animation: fadeIn 10s infinite alternate;
+}
+.images img:nth-child(3) {
+    opacity: 0;
+    animation: fadeIn 10s infinite alternate 5s; /* Starts after the first image */
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
 /* -------------------------------------------- Mobile --------------------------------------------------- */
 
 @media (max-width: 1500px) {
     .s-padding {
         padding: 2rem;
     }
-    header, .sidebar-tabs, .tab-content {
+    header, .tab-content {
         justify-content: center;
     }
     header {
@@ -364,13 +384,18 @@ h3 {
         text-align: center;
         font-size: 3rem;
         line-height: normal;
-    }    
+    }   
+    #home {
+        height: 100vh;
+    }
+    #interests h1, #gallery h1, #contact h1 {
+        font-size: 5rem;
+    }
+    section {
+        height: 70vh;
+    }
+    #skills .row h2{
+        font-size: 2rem;
+    }
 
-    footer {
-    flex-direction: column;    
-    }
-    footer p, footer a {
-        font-size: 0.8rem;
-        margin: 0;
-    }
 }
