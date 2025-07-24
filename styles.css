@@ -350,6 +350,37 @@ h3 {
     }
 }
 
+/* -------------------------------------------- PRESENCE STYLES -------------------------------------------- */
+
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 800px;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  background-color: var(--white);
+  border-radius: 1rem;
+  transition: transform 0.2s ease;
+  padding: 1rem;
+  border: 1px solid var(--black);
+}
+
+.social-button:hover {
+  transform: scale(1.05);
+}
+
+.social-button img, .social-button i {
+    max-width: 50%;
+    max-height: 50%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
 
 /* -------------------------------------------- Mobile --------------------------------------------------- */
 
