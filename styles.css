@@ -233,19 +233,19 @@ h2:hover, h2#active {
     font-size: 2rem;
   }
 
-  .header {
+    .header {
     flex-direction: column;
     height: auto;
     padding: 1rem;
   }
 
-  .header .left {
-    display: none;
-  }
-
   .content {
     flex-direction: column-reverse;
     height: auto;
+  }
+
+  .header .left {
+    display: none;
   }
 
   .left, .right {
@@ -293,5 +293,8 @@ h2:hover, h2#active {
     h1 {
         font-size: 5rem;
         line-height: 5rem;
+    }
+    .bg {
+        display: none;
     }
 }
