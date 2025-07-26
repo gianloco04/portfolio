@@ -257,9 +257,6 @@ p {
     .content .left {
         border: none
     }
-    .content .right {
-        height: 100vh;
-    }
     .text {
         border-top: 1px solid var(--black);
         height: 100vh;
