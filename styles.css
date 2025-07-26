@@ -100,7 +100,7 @@ h3{
     width: 90%;
     height: 90%;
     object-fit: cover;
-    animation: moveUp 4s ease-out;
+    animation: moveUp 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     z-index: -1;
 }
 
@@ -224,25 +224,57 @@ p {
     h1 {
         font-size: 5rem;
         text-align: center;
-        line-height: 5rem;
+        line-height: 3.5rem;
     }
-    .left {
+
+    h2 {
+        font-size: 2.5rem;
+    }
+
+    h2:hover, h2#active {
+        font-size: 2.5rem;
+    }
+    .header .left {
         display: none;
     }
+    
     .right {
         width: 100%;
-        height: 100%;
         display: flex;
+    }
+    .bg {
+        width: auto;
+        top: 0;
+        animation: none;
+    }
+    .popup-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .content {
+        flex-direction: column-reverse;
+    }
+    .content .left {
+        border: none
+    }
+    .content .right {
+        height: 100vh;
+    }
+    .text {
+        border-top: 1px solid var(--black);
+        height: 100vh;
+        width: 100vw;
         align-items: center;
         justify-content: center;
+    }
+    p {
+        width: 100%;
+        font-size: 1rem;
     }
 }
 
 @media (max-width: 1000px) {
     h1 {
         font-size: 4rem;
-    }
-    h2 {
-        font-size: 2.5rem;
     }
 }
