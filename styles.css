@@ -218,6 +218,10 @@ p {
 }
 
 @media (max-width: 1619px) {
+    #home {
+        display: flex;
+        flex-direction: column;
+    }
     p, .btn {
         width: 100%;
     }
