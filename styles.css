@@ -97,8 +97,9 @@ h3{
 
 .bg {
     position: absolute;
-    width: 90%;
-    height: 90%;
+    width: 100%;
+    height: auto;
+    max-height: 100%;
     object-fit: cover;
     animation: moveUp 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     z-index: -1;
@@ -154,9 +155,9 @@ a {
     background-color: var(--black);
     width: 57%;
     margin-top: 1rem;
-    height: 2rem;
-    padding: 0.5rem;
+    height: 3rem;
     text-align: center;
+    line-height: 3rem;
     color: var(--white);
 }
 
@@ -217,65 +218,80 @@ p {
     transform: scale(1.2);
 }
 
+@media (max-width: 1095px) {
+  h1 {
+    font-size: 3rem;
+    line-height: 3rem;
+    text-align: center;
+  }
+
+  h2, .tt {
+    font-size: 2rem;
+  }
+
+h2:hover, h2#active {
+    font-size: 2rem;
+  }
+
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .header .left {
+    display: none;
+  }
+
+  .content {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .left, .right {
+    width: 100vw;
+    height: auto;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+
+  .text {
+    height: auto;
+    padding: 2rem;
+  }
+
+  .top, .bottom {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .popup-content {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .popup-content img, .popup-content i {
+    font-size: 3rem;
+    height: 3rem;
+  }
+}
+
 @media (max-width: 1619px) {
-    #home {
-        display: flex;
-        flex-direction: column;
+    p {
+        width: 100%;
     }
-    p, .btn {
+    .btn {
         width: 100%;
     }
     h1 {
         font-size: 5rem;
-        text-align: center;
-        line-height: 3.5rem;
-    }
-
-    h2 {
-        font-size: 2.5rem;
-    }
-
-    h2:hover, h2#active {
-        font-size: 2.5rem;
-    }
-    .header .left {
-        display: none;
-    }
-    
-    .right {
-        width: 100%;
-        display: flex;
-    }
-    .bg {
-        width: auto;
-        top: 0;
-        animation: none;
-    }
-    .popup-content {
-        flex-direction: column;
-        align-items: center;
-    }
-    .content {
-        flex-direction: column-reverse;
-    }
-    .content .left {
-        border: none
-    }
-    .text {
-        border-top: 1px solid var(--black);
-        height: 100vh;
-        width: 100vw;
-        align-items: center;
-        justify-content: center;
-    }
-    p {
-        width: 100%;
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 1000px) {
-    h1 {
-        font-size: 4rem;
+        line-height: 5rem;
     }
 }
