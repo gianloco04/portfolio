@@ -36,7 +36,7 @@
     <section id="home">
         <div class="header">
             <div class="left"><h3 id="leftTitle">CD</h3></div>
-            <div class="right name"><h1>GIANLUCA CERCHIAI</h1></div>
+            <div class="right name"><h1 id="typeit"></h1></div>
         </div>
         <hr>
         <div class="content">
@@ -69,5 +69,15 @@
   </div>
 </div>
     <script src="../script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/index.umd.js"></script>
+    <script>
+  new TypeIt("#typeit", {
+    strings: ["GIANLUCA CERCHIAI"],
+    speed: 120,
+    cursor: false,
+    breakLines: false,
+    loop: false,
+  }).go();
+</script>
 </body>
 </html>

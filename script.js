@@ -1,5 +1,3 @@
-
-
 const contentMap = {
   me: {
     title: "CD",
