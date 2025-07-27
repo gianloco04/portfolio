@@ -106,6 +106,19 @@ h3{
     z-index: -1;
 }
 
+@media (max-width: 1619px) {
+    p {
+        width: 100%;
+    }
+    .btn {
+        width: 100%;
+    }
+    h1 {
+        font-size: 5rem;
+        line-height: 5rem;
+    }
+}
+
 @keyframes moveUp {
     from {
         transform: translateY(300%);
@@ -284,15 +297,3 @@ h2:hover, h2#active {
   }
 }
 
-@media (max-width: 1619px) {
-    p {
-        width: 100%;
-    }
-    .btn {
-        width: 100%;
-    }
-    h1 {
-        font-size: 5rem;
-        line-height: 5rem;
-    }
-}
