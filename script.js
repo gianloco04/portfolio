@@ -40,7 +40,7 @@ document.querySelectorAll("h2[data-id]").forEach(h2 => {
       btn.classList.add("btn");
       btn.classList.add("flex");
       btn.href = button.href;
-      btn.target = "_blank"; // Abre en una nueva pestaña
+      btn.target = "_blank";
       btn.style.display = "inline-block";
     } else {
       btn.style.display = "none";
@@ -60,7 +60,7 @@ hoverItems.forEach(item => {
   });
 });
 
-const socialMediaBtn = document.querySelector(".tt:nth-child(1)"); // El primer .tt = "SOCIAL MEDIA"
+const socialMediaBtn = document.querySelector(".tt:nth-child(1)");
 const popup = document.getElementById("popup");
 const closeBtn = document.getElementById("closePopup");
 
@@ -72,7 +72,6 @@ closeBtn.addEventListener("click", () => {
   popup.classList.add("hidden");
 });
 
-// También puedes cerrar al hacer clic fuera del contenido
 popup.addEventListener("click", (e) => {
   if (e.target === popup) {
     popup.classList.add("hidden");
@@ -86,7 +85,7 @@ document.getElementById("contact").addEventListener("click", () => {
 document.getElementById("cv").addEventListener("click", () => {
   const link = document.createElement("a");
   link.href = "ruta/mi-cv.pdf";
-  link.target = "_blank"; // Abre en una nueva pestaña
-  link.download = "Gianluca-CV.pdf"; // Puedes darle el nombre que quieras
+  link.target = "_blank";
+  link.download = "Gianluca-CV.pdf";
   link.click();
 });

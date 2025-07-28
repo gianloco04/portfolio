@@ -15,7 +15,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
 }
 
 body {
@@ -132,14 +131,16 @@ hr {
     border: none;
 }
 
+
 /* ---------------------------------- BELOW -------------------------------------*/
 
 
 .bg {
     position: absolute;
+    bottom: 0;
     width: 100%;
     height: auto;
-    max-height: 100%;
+    max-height: 85%;
     object-fit: cover;
     animation: moveUp 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     z-index: -1;
@@ -260,6 +261,7 @@ hr {
   .content {
     flex-direction: column-reverse;
     height: auto;
+
   }
 
   .header .left {
