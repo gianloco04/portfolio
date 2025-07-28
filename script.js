@@ -8,9 +8,9 @@ I'm currently studying Business and Technology and working part-time as a data a
   },
   font: {
     title: "XYZ",
-    text: `I designed this typeface myself for the 2023 graphic design competition.
+    text: `I designed the typeface below by myself for the 2023 graphic design competition.
 After the contest ended, I decided to continue developing the font as a personal project, adding different weights and versions.`,
-    button: { text: "GET MY FONT", href: "https://ceresdesign.gumroad.com/l/ceresfont" }
+    button: { text: "GET FONT", href: "https://ceresdesign.gumroad.com/l/ceresfont" }
   },
   contest23: {
     title: "ART",
@@ -38,6 +38,7 @@ document.querySelectorAll("h2[data-id]").forEach(h2 => {
     if (button) {
       btn.textContent = button.text;
       btn.classList.add("btn");
+      btn.classList.add("flex");
       btn.href = button.href;
       btn.target = "_blank"; // Abre en una nueva pestaña
       btn.style.display = "inline-block";
