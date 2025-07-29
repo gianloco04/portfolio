@@ -227,11 +227,6 @@ hr {
 .popup-content img:hover, i:hover {
     transform: scale(1.3);
 }
-
-.hidden-sliding-container {
-  transform: translateY(100%); /* Se mueve hacia abajo fuera de pantalla */
-}
-
 /* ---------------------------------- MEDIA QUERIES -------------------------------------*/
 
 @media (max-width: 1619px) {
