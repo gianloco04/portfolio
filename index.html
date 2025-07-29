@@ -40,7 +40,10 @@
         </div>
         <hr>
         <div class="content flex">
-            <div class="left text flex end"><p id="leftText"></p>
+            <div id="sliding" class="left text flex end"><hr class="slider" style="height: 3px; width: 20%; margin-bottom: 2rem;">
+            <p id="leftText">I was born on October 20, 2004, and I live on the island of Mallorca, Spain.
+            I enjoy designing and programming, but above all, I love learning how to do it and seeing the results.
+            I'm currently studying Business and Technology and working part-time as a data analyst at e3 Systems.</p>
             <a id="leftButton" style="display: none;"></a>
             </div>
             <div class="right menu flex column end">
@@ -58,6 +61,18 @@
                 </div>
             </div>
         </div>
+    </section>
+    <hr>
+    <section id="home" style="background-color: var(--white);">
+      <div class="header flex">
+        <div class="left flex end"></div>
+        <div class="right name flex end"></div>
+      </div>
+      <hr>
+      <div class="content flex">
+        <div class="left text flex end"></div>
+        <div class="right menu flex column end"></div>
+      </div>
     </section>
     <div id="popup" class="popup hidden flex center">
   <div class="popup-content center">
@@ -78,6 +93,26 @@
     breakLines: false,
     loop: false,
   }).go();
+
+  const contenedor = document.getElementById('sliding');
+  let startY = null;
+
+  contenedor.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+  });
+
+  contenedor.addEventListener('touchmove', (e) => {
+    if (!startY) return;
+    let currentY = e.touches[0].clientY;
+    let diff = currentY - startY;
+
+    // Si desliza hacia abajo más de 30px
+    if (diff > 30) {
+      contenedor.classList.add('hidden-sliding-container');
+      startY = null;
+    }
+  });
 </script>
+
 </body>
 </html>

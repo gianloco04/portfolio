@@ -8,7 +8,7 @@ I'm currently studying Business and Technology and working part-time as a data a
   },
   font: {
     title: "XYZ",
-    text: `I designed the typeface below by myself for the 2023 graphic design competition.
+    text: `I designed the typeface above by myself for the 2023 graphic design competition.
 After the contest ended, I decided to continue developing the font as a personal project, adding different weights and versions.`,
     button: { text: "GET FONT", href: "https://ceresdesign.gumroad.com/l/ceresfont" }
   },
