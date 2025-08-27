@@ -93,6 +93,12 @@ a {
     text-decoration: none;
 }
 
+li {
+    font-family: 'Larken';
+    font-size: 1.2rem;
+    text-indent: 0;
+}
+
 .btn {
     background-color: var(--black);
     width: 57%;
@@ -126,6 +132,11 @@ p {
     border-right: 1px solid var(--black);
     padding: 2rem;
 
+}
+
+.col {
+    padding: 2rem;
+    width: 25vw;
 }
 
 .right {
@@ -262,11 +273,11 @@ hr {
   }
 
   h2, .tt {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   h2:hover, h2#active {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 
   .header {
