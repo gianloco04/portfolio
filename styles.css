@@ -372,22 +372,23 @@ hr {
     justify-content: center;
   }
 
-
   .col {
     width: 100vw;
     border: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 2rem 0;
   }
 
   .col p {
     text-align: center;
   }
 
-  .col2 {
+  .col2, .col3 {
     display: none;
   }
+
 
   .skills-text {
     display: block;
