@@ -1,27 +1,27 @@
 const contentMap = {
   me: {
     title: "CD",
-    text: `I was born on October 20, 2004, and I live on the island of Mallorca, Spain.
-I enjoy designing and programming, but above all, I love learning how to do it and seeing the results.
-I'm currently studying Business and Technology and working part-time as a data analyst at e3 Systems.`,
+    text: `I was born on October 20, 2004, and I live on the island of <span>Mallorca</span>, Spain.
+    I love <span>programming and design</span>, especially the process of learning and seeing the results take shape.
+    I'm studying <span>Business and Technology</span> and working part-time as a <span>data analyst at e3 Systems.</span>`,
     button: null
   },
   font: {
     title: "XYZ",
-    text: `I designed the typeface above by myself for the 2023 graphic design competition.
-After the contest ended, I decided to continue developing the font as a personal project, adding different weights and versions.`,
+    text: `<span>I designed the typeface above</span> by myself for the 2023 graphic design competition.
+After the contest ended, I decided to continue developing the font as <span>a personal project</span>, adding different weights and versions.`,
     button: { text: "GET FONT", href: "https://ceresdesign.gumroad.com/l/ceresfont" }
   },
   contest23: {
     title: "ART",
-    text: `I took part in a graphic design competition that brought together young people between the ages of 18 and 35, with the goal of testing the skills I’ve learned on my own.
-To my surprise, I made it to the final round of the tournament, competing head-to-head with professional designers.`,
+    text: `I took part in a <span>graphic design competition</span> that brought together young people between the ages of 18 and 35, with the goal of testing the skills I’ve learned on my own.
+To my surprise, <span>I made it to the final</span> round of the tournament, <span>competing head-to-head with professional designers.</span>`,
     button: { text: "SEE DESIGN", href: "ilovepdf_merged.pdf" }
   },
   contest25: {
     title: "ART",
-    text: `This year, I’ve signed up for a new edition of the competition—this time with the clear intention of winning.
-I’m approaching it with more experience, clearer ideas, and the motivation to prove how far I’ve come through self-taught practice and creative exploration.`,
+    text: `This year, <span>I’ve signed up</span> for a new edition of the competition—this time <span>with the clear intention of winning.</span>
+I’m approaching it with more experience, clearer ideas, and the motivation <span>to prove how far I’ve come through self-taught practice and creative exploration.</span>`,
     button: null
   }
 };
