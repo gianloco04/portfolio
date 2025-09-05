@@ -206,11 +206,9 @@ hr {
 
 #skills {
     background-color: var(--white);
-    height: 25vh;
     position: relative;
-    border-bottom: 1px solid var(--black);
     gap: 2rem;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .skills-container {
