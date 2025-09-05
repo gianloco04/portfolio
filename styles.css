@@ -214,7 +214,11 @@ hr {
 }
 
 .skills-container i {
-    font-size: 2rem;
+    font-size: 1.75rem;
+}
+
+@media (max-width: 1095px) {
+
 }
 
 /* ---------------------------------- POPUP -------------------------------------*/
