@@ -203,23 +203,63 @@ hr {
 #skills {
     background-color: var(--white);
     position: relative;
+}
+
+.skills-left {
+    height: 25vh;
+    width: 75vw;
+    border-right: 1px solid var(--black);
+}
+
+.skills-right {
+    justify-content: space-between;
+    height: 25vh;
+    width: 25vw;
     gap: 2rem;
     padding: 2rem;
 }
 
 .skills-container {
+    display: flex;
     justify-content: space-between;
-    width: 100vw;
-    padding: 1rem 4rem;
-    border-bottom: 1px solid var(--black);
+    width: 100%;
 }
 
 .skills-container i {
-    font-size: 1.75rem;
+    font-size: 2.5rem;
+}
+
+.skills-container img {
+    height: 2.25rem;
 }
 
 @media (max-width: 1095px) {
+    .skills-container {
+        width: 100vw;
+        padding: 1rem 3.5rem;
+        border-bottom: 1px solid var(--black);
+    }
 
+    .skills-container i {
+        font-size: 1.75rem;
+    }
+    .skills-container img {
+        height: 1.5rem;
+    }
+    .skills-left {
+        display: none;
+    }
+    .skills-right {
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: auto;
+        padding: 2rem;
+    }
+
+    .skills-right h2 {
+        font-size: 3rem;
+    }
 }
 
 /* ---------------------------------- POPUP -------------------------------------*/
