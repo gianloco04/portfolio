@@ -198,10 +198,6 @@ hr {
     justify-content: start;
 }
 
-.slider {
-    display: none;
-}
-
 /* ----------------------------------- PARTE DE ABAJO -------------------------------------*/
 
 #skills {
@@ -219,12 +215,6 @@ hr {
 
 .skills-container i {
     font-size: 2rem;
-}
-
-@media (max-width: 1095px) {
-    #skills {
-
-    }
 }
 
 /* ---------------------------------- POPUP -------------------------------------*/
@@ -306,10 +296,6 @@ hr {
     padding: 1rem;
   }
 
-  .slider {
-    display: block;
-}
-
   .content {
     flex-direction: column-reverse;
     height: auto;
@@ -335,7 +321,7 @@ hr {
   }
 
   .text {
-    height: auto;
+    height: 25vh;
     padding: 2rem;
   }
 
