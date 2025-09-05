@@ -208,13 +208,16 @@ hr {
 }
 
 .skills-container {
-    width: 80vw;
     gap: 1rem;
-    flex-wrap: wrap;
+    width: 100vw;
+    padding: 1rem 0;
+    border-top: 1px solid var(--black);
+    border-bottom: 1px solid var(--black);
 }
 
 .skills-container i {
     font-size: 1.75rem;
+    line-height: 0.5rem;
 }
 
 @media (max-width: 1095px) {
@@ -251,9 +254,12 @@ hr {
 
 }
 
+.popup-content img {
+    height: 4.2rem;
+}
+
 .popup-content img, i {
   font-size: 4rem;
-  height: 4.2rem;
   width: auto;
   color: var(--black);
   transition: all 0.3s ease-in-out;
