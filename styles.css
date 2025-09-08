@@ -160,8 +160,8 @@ hr {
     bottom: 0;
     width: 100%;
     height: auto;
-    max-height: 85%;
-    object-fit: cover;
+    max-height: 100%;
+    object-fit: calc(cover - 15%);
     animation: moveUp 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     z-index: -1;
 }
