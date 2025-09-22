@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Dots Grid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<style>
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #e5e5e5;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  padding: 0.5rem;
+  height: 50px;
+  width: 50px;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid #aaa;
+  background: #e5e5e5;
+  color: #2c2c2c;
+}
+
+.btn-secondary {
+  background-color: #2c2c2c;
+  color: white;
+}
+
+.grid-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.grid {
+  display: inline-grid;
+  grid-template-columns: repeat(16, 30px);
+  grid-template-rows: repeat(16, 30px);
+  gap: 0;
+  background-color: white;
+}
+
+.cell {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.cell-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.fondo {
+  z-index: 1;
+}
+
+.fondo2 {
+  z-index: 2;
+  background-color: #e5e5e5;
+}
+
+.punto {
+  z-index: 3;
+  background-color: #aaa;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.seleccion {
+  z-index: 4;
+  background-color: #2c2c2c;
+}
+
+.description {
+  margin-top: 2rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.description p {
+  font-size: 0.875rem;
+}
+
+</style>
+<body>
+    <div class="container">
+        
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button id="clearGrid" class="btn btn-default"><i class="fa-solid fa-trash"></i></button>
+            <button id="toggleDots" class="btn btn-default"><i class="fa-solid fa-eye"></i></button>
+            <button id="toggleSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-square"></i></button>
+            <button id="toggleNotSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-circle"></i></button>
+        </div>
+
+        <!-- Grid Container -->
+        <div class="grid-wrapper">
+            <div id="grid" class="grid"></div>
+        </div>
+    </div>
+
+    <script>
+      const GRID_SIZE = 16
+const CELL_SIZE = 30
+
+class DotsGrid {
+  constructor() {
+    this.grid = this.initializeGrid()
+    this.showDots = true
+    this.enableSelectedBorderRadius = true
+    this.enableNotSelectedBorderRadius = true
+
+    this.init()
+  }
+
+  initializeGrid() {
+    return Array(GRID_SIZE)
+      .fill(null)
+      .map(() =>
+        Array(GRID_SIZE)
+          .fill(null)
+          .map(() => ({
+            selected: false,
+            borderRadius: {
+              topLeft: false,
+              topRight: false,
+              bottomLeft: false,
+              bottomRight: false,
+            },
+          })),
+      )
+  }
+
+  init() {
+    this.createGrid()
+    this.setupEventListeners()
+  }
+
+  createGrid() {
+    const gridElement = document.getElementById("grid")
+    gridElement.innerHTML = ""
+
+    for (let row = 0; row < GRID_SIZE; row++) {
+      for (let col = 0; col < GRID_SIZE; col++) {
+        const cell = document.createElement("div")
+        cell.className = "cell"
+        cell.dataset.row = row
+        cell.dataset.col = col
+
+        // FONDO layer
+        const fondoLayer = document.createElement("div")
+        fondoLayer.className = "cell-layer fondo"
+
+        // FONDO 2 layer
+        const fondo2Layer = document.createElement("div")
+        fondo2Layer.className = "cell-layer fondo2"
+
+        // PUNTO layer
+        const puntoLayer = document.createElement("div")
+        puntoLayer.className = "cell-layer punto"
+
+        // SELECCION layer
+        const seleccionLayer = document.createElement("div")
+        seleccionLayer.className = "cell-layer seleccion"
+
+        cell.appendChild(fondoLayer)
+        cell.appendChild(fondo2Layer)
+        cell.appendChild(puntoLayer)
+        cell.appendChild(seleccionLayer)
+
+        cell.addEventListener("click", () => this.handleCellClick(row, col))
+
+        gridElement.appendChild(cell)
+      }
+    }
+
+    this.updateGridDisplay()
+  }
+
+  setupEventListeners() {
+    document.getElementById("clearGrid").addEventListener("click", () => this.clearGrid())
+    document.getElementById("toggleDots").addEventListener("click", () => this.toggleDots())
+    document
+      .getElementById("toggleSelectedBorderRadius")
+      .addEventListener("click", () => this.toggleSelectedBorderRadius())
+    document
+      .getElementById("toggleNotSelectedBorderRadius")
+      .addEventListener("click", () => this.toggleNotSelectedBorderRadius())
+  }
+
+  handleCellClick(row, col) {
+    this.grid[row][col].selected = !this.grid[row][col].selected
+    this.updateBorderRadius()
+    this.updateGridDisplay()
+  }
+
+  updateBorderRadius() {
+    for (let row = 0; row < GRID_SIZE; row++) {
+      for (let col = 0; col < GRID_SIZE; col++) {
+        const cell = this.grid[row][col]
+        const isSelected = cell.selected
+
+        // Reset border radius
+        cell.borderRadius = {
+          topLeft: false,
+          topRight: false,
+          bottomLeft: false,
+          bottomRight: false,
+        }
+
+        const shouldApplyBorderRadius =
+          (isSelected && this.enableSelectedBorderRadius) || (!isSelected && this.enableNotSelectedBorderRadius)
+
+        if (shouldApplyBorderRadius) {
+          // Get neighbors (treating out-of-bounds as opposite state)
+          const topNeighbor = row > 0 ? this.grid[row - 1][col].selected : !isSelected
+          const bottomNeighbor = row < GRID_SIZE - 1 ? this.grid[row + 1][col].selected : !isSelected
+          const leftNeighbor = col > 0 ? this.grid[row][col - 1].selected : !isSelected
+          const rightNeighbor = col < GRID_SIZE - 1 ? this.grid[row][col + 1].selected : !isSelected
+
+          // Get diagonal neighbors
+          const topLeftDiagonal = row > 0 && col > 0 ? this.grid[row - 1][col - 1].selected : !isSelected
+          const topRightDiagonal = row > 0 && col < GRID_SIZE - 1 ? this.grid[row - 1][col + 1].selected : !isSelected
+          const bottomLeftDiagonal = row < GRID_SIZE - 1 && col > 0 ? this.grid[row + 1][col - 1].selected : !isSelected
+          const bottomRightDiagonal =
+            row < GRID_SIZE - 1 && col < GRID_SIZE - 1 ? this.grid[row + 1][col + 1].selected : !isSelected
+
+          if (isSelected) {
+            // Para casillas SELECCIONADAS: border radius cuando una esquina está en contacto con 3 casillas NO seleccionadas
+            if (topNeighbor !== isSelected && leftNeighbor !== isSelected && topLeftDiagonal !== isSelected) {
+              cell.borderRadius.topLeft = true
+            }
+            if (topNeighbor !== isSelected && rightNeighbor !== isSelected && topRightDiagonal !== isSelected) {
+              cell.borderRadius.topRight = true
+            }
+            if (bottomNeighbor !== isSelected && leftNeighbor !== isSelected && bottomLeftDiagonal !== isSelected) {
+              cell.borderRadius.bottomLeft = true
+            }
+            if (bottomNeighbor !== isSelected && rightNeighbor !== isSelected && bottomRightDiagonal !== isSelected) {
+              cell.borderRadius.bottomRight = true
+            }
+          } else {
+            // Para casillas NO SELECCIONADAS: border radius cuando una esquina está en contacto con 2 casillas SELECCIONADAS contiguas
+            if (topNeighbor !== isSelected && leftNeighbor !== isSelected) {
+              cell.borderRadius.topLeft = true
+            }
+            if (topNeighbor !== isSelected && rightNeighbor !== isSelected) {
+              cell.borderRadius.topRight = true
+            }
+            if (bottomNeighbor !== isSelected && leftNeighbor !== isSelected) {
+              cell.borderRadius.bottomLeft = true
+            }
+            if (bottomNeighbor !== isSelected && rightNeighbor !== isSelected) {
+              cell.borderRadius.bottomRight = true
+            }
+          }
+        }
+      }
+    }
+  }
+
+  getBorderRadiusStyle(borderRadius) {
+    return {
+      borderTopLeftRadius: borderRadius.topLeft ? "8px" : "0px",
+      borderTopRightRadius: borderRadius.topRight ? "8px" : "0px",
+      borderBottomLeftRadius: borderRadius.bottomLeft ? "8px" : "0px",
+      borderBottomRightRadius: borderRadius.bottomRight ? "8px" : "0px",
+    }
+  }
+
+  updateGridDisplay() {
+    const cells = document.querySelectorAll(".cell")
+
+    cells.forEach((cellElement, index) => {
+      const row = Math.floor(index / GRID_SIZE)
+      const col = index % GRID_SIZE
+      const cellData = this.grid[row][col]
+
+      const fondoLayer = cellElement.querySelector(".fondo")
+      const fondo2Layer = cellElement.querySelector(".fondo2")
+      const puntoLayer = cellElement.querySelector(".punto")
+      const seleccionLayer = cellElement.querySelector(".seleccion")
+
+      // Update FONDO layer
+      fondoLayer.style.backgroundColor = cellData.selected ? "#e5e5e5" : "#2c2c2c"
+
+      // Update FONDO 2 layer
+      if (!cellData.selected) {
+        fondo2Layer.style.display = "block"
+        const borderStyle = this.getBorderRadiusStyle(cellData.borderRadius)
+        Object.assign(fondo2Layer.style, borderStyle)
+      } else {
+        fondo2Layer.style.display = "none"
+      }
+
+      // Update PUNTO layer
+      if (!cellData.selected && this.showDots) {
+        puntoLayer.style.display = "block"
+      } else {
+        puntoLayer.style.display = "none"
+      }
+
+      // Update SELECCION layer
+      if (cellData.selected) {
+        seleccionLayer.style.display = "block"
+        const borderStyle = this.getBorderRadiusStyle(cellData.borderRadius)
+        Object.assign(seleccionLayer.style, borderStyle)
+      } else {
+        seleccionLayer.style.display = "none"
+      }
+    })
+  }
+
+  clearGrid() {
+    this.grid = this.initializeGrid()
+    this.updateGridDisplay()
+  }
+
+  toggleDots() {
+    this.showDots = !this.showDots
+    const button = document.getElementById("toggleDots")
+    button.innerHTML = this.showDots ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>'
+    button.className = this.showDots ? "btn btn-default" : "btn btn-secondary"
+    this.updateGridDisplay()
+  }
+
+  toggleSelectedBorderRadius() {
+    this.enableSelectedBorderRadius = !this.enableSelectedBorderRadius
+    const button = document.getElementById("toggleSelectedBorderRadius")
+    button.innerHTML = this.enableSelectedBorderRadius
+      ? '<i class="fa-solid fa-square"></i>'
+      : '<i class="fa-regular fa-square"></i>'
+    button.className = this.enableSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
+    this.updateBorderRadius()
+    this.updateGridDisplay()
+  }
+
+  toggleNotSelectedBorderRadius() {
+    this.enableNotSelectedBorderRadius = !this.enableNotSelectedBorderRadius
+    const button = document.getElementById("toggleNotSelectedBorderRadius")
+    button.innerHTML = this.enableNotSelectedBorderRadius
+      ? '<i class="fa-solid fa-circle"></i>'
+      : '<i class="fa-regular fa-circle"></i>'
+    button.className = this.enableNotSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
+    this.updateBorderRadius()
+    this.updateGridDisplay()
+  }
+}
+
+// Initialize the grid when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+  new DotsGrid()
+})
+
+    </script>
+</body>
+</html>
