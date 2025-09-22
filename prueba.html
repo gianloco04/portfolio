@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Dots Grid</title>
+    <title>Interactive Dots Grid - Enhanced</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <style>
@@ -21,7 +21,7 @@ body {
 }
 
 .container {
-  max-width: 64rem;
+  max-width: 80rem;
   margin: 0 auto;
 }
 
@@ -36,7 +36,7 @@ body {
 .btn {
   padding: 0.5rem;
   height: 50px;
-  width: 50px;
+  min-width: 50px;
   border: none;
   border-radius: 2rem;
   cursor: pointer;
@@ -53,6 +53,37 @@ body {
   color: white;
 }
 
+.btn-success {
+  background-color: #22c55e;
+  color: white;
+}
+
+.btn-wide {
+  width: auto;
+  padding: 0.5rem 1rem;
+}
+
+.grids-container {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.grid-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.grid-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
 .grid-wrapper {
   display: flex;
   justify-content: center;
@@ -64,6 +95,11 @@ body {
   grid-template-rows: repeat(16, 30px);
   gap: 0;
   background-color: white;
+  border: 2px solid #aaa;
+}
+
+.grid.readonly {
+  border-color: #22c55e;
 }
 
 .cell {
@@ -71,6 +107,10 @@ body {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+.grid.readonly .cell {
+  cursor: default;
 }
 
 .cell-layer {
@@ -113,6 +153,30 @@ body {
   font-size: 0.875rem;
 }
 
+.congratulations {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #22c55e;
+  color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 1000;
+  display: none;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.pattern-info {
+  margin-top: 1rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
 </style>
 <body>
     <div class="container">
@@ -123,11 +187,38 @@ body {
             <button id="toggleDots" class="btn btn-default"><i class="fa-solid fa-eye"></i></button>
             <button id="toggleSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-square"></i></button>
             <button id="toggleNotSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-circle"></i></button>
+            <button id="submitPattern" class="btn btn-success btn-wide">Enviar Patrón</button>
         </div>
 
-        <!-- Grid Container -->
-        <div class="grid-wrapper">
-            <div id="grid" class="grid"></div>
+        <!-- Grids Container -->
+        <div class="grids-container">
+            <!-- Editable Grid -->
+            <div class="grid-section">
+                <h2 class="grid-title">Tu Dibujo</h2>
+                <div class="grid-wrapper">
+                    <div id="editableGrid" class="grid"></div>
+                </div>
+                <div class="pattern-info">
+                    <p>Mantén presionado para dibujar</p>
+                </div>
+            </div>
+
+            <!-- Display Grid -->
+            <div class="grid-section">
+                <h2 class="grid-title">Patrón a Replicar</h2>
+                <div class="grid-wrapper">
+                    <div id="displayGrid" class="grid readonly"></div>
+                </div>
+                <div class="pattern-info">
+                    <p id="patternCount">Patrones guardados: 0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Congratulations Modal -->
+        <div id="congratulations" class="congratulations">
+            <div>¡Felicidades!</div>
+            <div style="font-size: 1rem; margin-top: 0.5rem;">¡Has replicado el patrón correctamente!</div>
         </div>
     </div>
 
@@ -135,12 +226,25 @@ body {
       const GRID_SIZE = 16
 const CELL_SIZE = 30
 
-class DotsGrid {
+class EnhancedDotsGrid {
   constructor() {
-    this.grid = this.initializeGrid()
+    this.editableGrid = this.initializeGrid()
+    this.displayGrid = this.initializeGrid()
     this.showDots = true
     this.enableSelectedBorderRadius = true
     this.enableNotSelectedBorderRadius = true
+    this.isDrawing = false
+    this.drawingMode = null // 'select' or 'deselect'
+    
+    // Pattern storage
+    this.patterns = [
+      // Some default patterns to start with
+      '1111000000000000111100000000000011110000000000001111000000000000',
+      '0000111100000000000011110000000000001111000000000000111100000000',
+      '1010101010101010010101010101010110101010101010100101010101010101',
+      '1111111111111111100000000000000110000000000000011111111111111111'
+    ]
+    this.currentDisplayPattern = ''
 
     this.init()
   }
@@ -164,12 +268,19 @@ class DotsGrid {
   }
 
   init() {
-    this.createGrid()
+    this.createGrids()
     this.setupEventListeners()
+    this.showRandomPattern()
+    this.updatePatternCount()
   }
 
-  createGrid() {
-    const gridElement = document.getElementById("grid")
+  createGrids() {
+    this.createGrid('editableGrid', this.editableGrid, true)
+    this.createGrid('displayGrid', this.displayGrid, false)
+  }
+
+  createGrid(containerId, gridData, isEditable) {
+    const gridElement = document.getElementById(containerId)
     gridElement.innerHTML = ""
 
     for (let row = 0; row < GRID_SIZE; row++) {
@@ -200,17 +311,30 @@ class DotsGrid {
         cell.appendChild(puntoLayer)
         cell.appendChild(seleccionLayer)
 
-        cell.addEventListener("click", () => this.handleCellClick(row, col))
+        if (isEditable) {
+          // Mouse events for drag functionality
+          cell.addEventListener("mousedown", (e) => this.handleMouseDown(e, row, col))
+          cell.addEventListener("mouseenter", () => this.handleMouseEnter(row, col))
+          cell.addEventListener("mouseup", () => this.handleMouseUp())
+          
+          // Prevent context menu on right click
+          cell.addEventListener("contextmenu", (e) => e.preventDefault())
+        }
 
         gridElement.appendChild(cell)
       }
     }
 
-    this.updateGridDisplay()
+    // Global mouse events for drag functionality
+    if (isEditable) {
+      document.addEventListener("mouseup", () => this.handleMouseUp())
+    }
+
+    this.updateGridDisplay(containerId, gridData)
   }
 
   setupEventListeners() {
-    document.getElementById("clearGrid").addEventListener("click", () => this.clearGrid())
+    document.getElementById("clearGrid").addEventListener("click", () => this.clearEditableGrid())
     document.getElementById("toggleDots").addEventListener("click", () => this.toggleDots())
     document
       .getElementById("toggleSelectedBorderRadius")
@@ -218,18 +342,44 @@ class DotsGrid {
     document
       .getElementById("toggleNotSelectedBorderRadius")
       .addEventListener("click", () => this.toggleNotSelectedBorderRadius())
+    document.getElementById("submitPattern").addEventListener("click", () => this.submitPattern())
   }
 
-  handleCellClick(row, col) {
-    this.grid[row][col].selected = !this.grid[row][col].selected
-    this.updateBorderRadius()
-    this.updateGridDisplay()
+  handleMouseDown(e, row, col) {
+    e.preventDefault()
+    this.isDrawing = true
+    
+    // Determine drawing mode based on current cell state
+    this.drawingMode = this.editableGrid[row][col].selected ? 'deselect' : 'select'
+    
+    // Apply the action to the clicked cell
+    this.editableGrid[row][col].selected = this.drawingMode === 'select'
+    
+    this.updateBorderRadius(this.editableGrid)
+    this.updateGridDisplay('editableGrid', this.editableGrid)
+    this.checkPatternMatch()
   }
 
-  updateBorderRadius() {
+  handleMouseEnter(row, col) {
+    if (!this.isDrawing) return
+    
+    // Apply the drawing mode to the entered cell
+    this.editableGrid[row][col].selected = this.drawingMode === 'select'
+    
+    this.updateBorderRadius(this.editableGrid)
+    this.updateGridDisplay('editableGrid', this.editableGrid)
+    this.checkPatternMatch()
+  }
+
+  handleMouseUp() {
+    this.isDrawing = false
+    this.drawingMode = null
+  }
+
+  updateBorderRadius(gridData) {
     for (let row = 0; row < GRID_SIZE; row++) {
       for (let col = 0; col < GRID_SIZE; col++) {
-        const cell = this.grid[row][col]
+        const cell = gridData[row][col]
         const isSelected = cell.selected
 
         // Reset border radius
@@ -245,17 +395,17 @@ class DotsGrid {
 
         if (shouldApplyBorderRadius) {
           // Get neighbors (treating out-of-bounds as opposite state)
-          const topNeighbor = row > 0 ? this.grid[row - 1][col].selected : !isSelected
-          const bottomNeighbor = row < GRID_SIZE - 1 ? this.grid[row + 1][col].selected : !isSelected
-          const leftNeighbor = col > 0 ? this.grid[row][col - 1].selected : !isSelected
-          const rightNeighbor = col < GRID_SIZE - 1 ? this.grid[row][col + 1].selected : !isSelected
+          const topNeighbor = row > 0 ? gridData[row - 1][col].selected : !isSelected
+          const bottomNeighbor = row < GRID_SIZE - 1 ? gridData[row + 1][col].selected : !isSelected
+          const leftNeighbor = col > 0 ? gridData[row][col - 1].selected : !isSelected
+          const rightNeighbor = col < GRID_SIZE - 1 ? gridData[row][col + 1].selected : !isSelected
 
           // Get diagonal neighbors
-          const topLeftDiagonal = row > 0 && col > 0 ? this.grid[row - 1][col - 1].selected : !isSelected
-          const topRightDiagonal = row > 0 && col < GRID_SIZE - 1 ? this.grid[row - 1][col + 1].selected : !isSelected
-          const bottomLeftDiagonal = row < GRID_SIZE - 1 && col > 0 ? this.grid[row + 1][col - 1].selected : !isSelected
+          const topLeftDiagonal = row > 0 && col > 0 ? gridData[row - 1][col - 1].selected : !isSelected
+          const topRightDiagonal = row > 0 && col < GRID_SIZE - 1 ? gridData[row - 1][col + 1].selected : !isSelected
+          const bottomLeftDiagonal = row < GRID_SIZE - 1 && col > 0 ? gridData[row + 1][col - 1].selected : !isSelected
           const bottomRightDiagonal =
-            row < GRID_SIZE - 1 && col < GRID_SIZE - 1 ? this.grid[row + 1][col + 1].selected : !isSelected
+            row < GRID_SIZE - 1 && col < GRID_SIZE - 1 ? gridData[row + 1][col + 1].selected : !isSelected
 
           if (isSelected) {
             // Para casillas SELECCIONADAS: border radius cuando una esquina está en contacto con 3 casillas NO seleccionadas
@@ -300,13 +450,14 @@ class DotsGrid {
     }
   }
 
-  updateGridDisplay() {
-    const cells = document.querySelectorAll(".cell")
+  updateGridDisplay(containerId, gridData) {
+    const gridElement = document.getElementById(containerId)
+    const cells = gridElement.querySelectorAll(".cell")
 
     cells.forEach((cellElement, index) => {
       const row = Math.floor(index / GRID_SIZE)
       const col = index % GRID_SIZE
-      const cellData = this.grid[row][col]
+      const cellData = gridData[row][col]
 
       const fondoLayer = cellElement.querySelector(".fondo")
       const fondo2Layer = cellElement.querySelector(".fondo2")
@@ -343,9 +494,9 @@ class DotsGrid {
     })
   }
 
-  clearGrid() {
-    this.grid = this.initializeGrid()
-    this.updateGridDisplay()
+  clearEditableGrid() {
+    this.editableGrid = this.initializeGrid()
+    this.updateGridDisplay('editableGrid', this.editableGrid)
   }
 
   toggleDots() {
@@ -353,7 +504,8 @@ class DotsGrid {
     const button = document.getElementById("toggleDots")
     button.innerHTML = this.showDots ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>'
     button.className = this.showDots ? "btn btn-default" : "btn btn-secondary"
-    this.updateGridDisplay()
+    this.updateGridDisplay('editableGrid', this.editableGrid)
+    this.updateGridDisplay('displayGrid', this.displayGrid)
   }
 
   toggleSelectedBorderRadius() {
@@ -363,8 +515,10 @@ class DotsGrid {
       ? '<i class="fa-solid fa-square"></i>'
       : '<i class="fa-regular fa-square"></i>'
     button.className = this.enableSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
-    this.updateBorderRadius()
-    this.updateGridDisplay()
+    this.updateBorderRadius(this.editableGrid)
+    this.updateBorderRadius(this.displayGrid)
+    this.updateGridDisplay('editableGrid', this.editableGrid)
+    this.updateGridDisplay('displayGrid', this.displayGrid)
   }
 
   toggleNotSelectedBorderRadius() {
@@ -374,14 +528,103 @@ class DotsGrid {
       ? '<i class="fa-solid fa-circle"></i>'
       : '<i class="fa-regular fa-circle"></i>'
     button.className = this.enableNotSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
-    this.updateBorderRadius()
-    this.updateGridDisplay()
+    this.updateBorderRadius(this.editableGrid)
+    this.updateBorderRadius(this.displayGrid)
+    this.updateGridDisplay('editableGrid', this.editableGrid)
+    this.updateGridDisplay('displayGrid', this.displayGrid)
+  }
+
+  // Convert grid to binary string
+  gridToBinaryString(gridData) {
+    let binaryString = ''
+    for (let row = 0; row < GRID_SIZE; row++) {
+      for (let col = 0; col < GRID_SIZE; col++) {
+        binaryString += gridData[row][col].selected ? '1' : '0'
+      }
+    }
+    return binaryString
+  }
+
+  // Convert binary string to grid
+  binaryStringToGrid(binaryString) {
+    const gridData = this.initializeGrid()
+    for (let i = 0; i < binaryString.length && i < GRID_SIZE * GRID_SIZE; i++) {
+      const row = Math.floor(i / GRID_SIZE)
+      const col = i % GRID_SIZE
+      gridData[row][col].selected = binaryString[i] === '1'
+    }
+    return gridData
+  }
+
+  // Submit current pattern
+  submitPattern() {
+    const binaryString = this.gridToBinaryString(this.editableGrid)
+    
+    // Don't add empty patterns or duplicates
+    if (binaryString.includes('1') && !this.patterns.includes(binaryString)) {
+      this.patterns.push(binaryString)
+      this.updatePatternCount()
+      
+      // Show success feedback
+      const button = document.getElementById("submitPattern")
+      const originalText = button.innerHTML
+      button.innerHTML = '¡Guardado!'
+      button.className = 'btn btn-success btn-wide'
+      
+      setTimeout(() => {
+        button.innerHTML = originalText
+      }, 1500)
+    }
+  }
+
+  // Show random pattern from the list
+  showRandomPattern() {
+    if (this.patterns.length === 0) return
+    
+    let randomPattern
+    do {
+      randomPattern = this.patterns[Math.floor(Math.random() * this.patterns.length)]
+    } while (randomPattern === this.currentDisplayPattern && this.patterns.length > 1)
+    
+    this.currentDisplayPattern = randomPattern
+    this.displayGrid = this.binaryStringToGrid(randomPattern)
+    this.updateBorderRadius(this.displayGrid)
+    this.updateGridDisplay('displayGrid', this.displayGrid)
+  }
+
+  // Check if editable grid matches display grid
+  checkPatternMatch() {
+    const editableBinary = this.gridToBinaryString(this.editableGrid)
+    const displayBinary = this.gridToBinaryString(this.displayGrid)
+    
+    if (editableBinary === displayBinary && editableBinary.includes('1')) {
+      this.showCongratulations()
+      // Show new pattern after a delay
+      setTimeout(() => {
+        this.showRandomPattern()
+      }, 2000)
+    }
+  }
+
+  // Show congratulations message
+  showCongratulations() {
+    const congratsElement = document.getElementById("congratulations")
+    congratsElement.style.display = "block"
+    
+    setTimeout(() => {
+      congratsElement.style.display = "none"
+    }, 3000)
+  }
+
+  // Update pattern count display
+  updatePatternCount() {
+    document.getElementById("patternCount").textContent = `Patrones guardados: ${this.patterns.length}`
   }
 }
 
-// Initialize the grid when the page loads
+// Initialize the enhanced grid when the page loads
 document.addEventListener("DOMContentLoaded", () => {
-  new DotsGrid()
+  new EnhancedDotsGrid()
 })
 
     </script>
