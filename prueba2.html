@@ -179,7 +179,7 @@
     let ultimo = JSON.parse(localStorage.getItem("ultimoMensaje")) || null;
 
     const ahora = Date.now();
-    const DURACION = 30 * 60 * 1000; // 30 minutos
+    const DURACION = 5 * 60 * 1000; // 30 minutos
     let index;
 
     if (ultimo && (ahora - ultimo.timestamp) < DURACION) {
