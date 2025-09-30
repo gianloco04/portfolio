@@ -42,10 +42,15 @@ body {
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
-  transition: all 0.2s;
+  transition: all 0.5s;
   border: 1px solid #aaa;
   background: #e5e5e5;
   color: #2c2c2c;
+}
+
+.btn:hover {
+  background: #2c2c2c;
+  color: white;
 }
 
 .btn-secondary {
@@ -206,7 +211,32 @@ body {
             <button id="toggleSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-square"></i></button>
             <button id="toggleNotSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-circle"></i></button>
             <button id="submitPattern" class="btn btn-success btn-wide">Enviar Dibujo</button>
+            <input type="date" id="fecha" class="btn btn-default"><button id="secret" class="btn btn-default"><i class="fa-solid fa-lock"></i></button>
         </div>
+
+        <script>
+          const fechaInput = document.getElementById("fecha");
+          const boton = document.getElementById("secret");
+          const icono = boton.querySelector("i");
+
+          fechaInput.addEventListener("change", () => {
+            // El formato del input type="date" es YYYY-MM-DD
+            if (fechaInput.value === "2022-04-18") {
+              icono.classList.remove("fa-lock");
+              icono.classList.add("fa-lock-open");
+
+              // añadimos la redirección al click
+              boton.onclick = () => {
+                window.location.href = "prueba2.html";
+              };
+            } else {
+              // si no es la fecha correcta, dejamos el lock cerrado
+              icono.classList.remove("fa-lock-open");
+              icono.classList.add("fa-lock");
+              boton.onclick = null; // sin acción
+            }
+          });
+        </script>
 
         <!-- Grids Container -->
         <div class="grids-container">

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensajes Aleatorios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #2c2c2c;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    #mensaje {
+      font-size: 1.2rem;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      margin-top: 20vh;
+      margin-bottom: 1rem;
+      padding: 10px 20px;
+      border: 1px solid #aaa;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    #contador {
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+    #circulos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      max-width: 400px; /* límite para que no se estire demasiado */
+      gap: 10px;
+      justify-content: center;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .circulo {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #aaa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      color: #2c2c2c;
+      transition: all 0.3s ease;
+      margin: auto;
+    }
+
+    .circulo.activo {
+      background: #2c2c2c;
+      color: #e5e5e5;
+      border: none;
+    }
+
+    button {
+      margin-top: 30px;
+      height: 50px;
+      width: 50px;
+      font-size: 1rem;
+      border: 1px solid #aaa;
+      border-radius: 50px;
+      color: #2c2c2c;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #2c2c2c;
+      color: #e5e5e5;
+    }
+
+    /* Ajustes responsive */
+    @media (max-width: 600px) {
+      #mensaje {
+        font-size: 1rem;
+        padding: 8px 15px;
+      }
+
+      .circulo {
+        width: 35px;
+        height: 35px;
+        font-size: 12px;
+      }
+
+      #circulos {
+        max-width: 100%;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .circulo {
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+      }
+
+      button {
+        height: 45px;
+        width: 45px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="mensaje">Cargando...</div>
+  <div id="contador"></div>
+  <div id="circulos"></div>
+
+  <button id="reset"><i class="fa-solid fa-trash"></i></button>
+
+  <script>
+    // Aquí escribes cada mensaje como quieras
+    const mensajes = [
+    "Muchas gracias por venir a mi casa incluso cuando no te viene bien.",
+    "Muchas gracias por animarme a estudiar y a esforzarme.",
+    "Muchas gracias por ayudarme siempre que lo necesito.",
+    "Muchas gracias por ser tan buena persona con mi familia y los que me rodean.",
+    "Muchas gracias por ser tan paciente conmigo.",
+    "Tienes un muy buen gusto musical. Es una de las cosas que más me gustan de ti.",
+    "Eres una persona muy inteligente y me encanta aprender de ti.",
+    "Eres una persona polivalente y se te da bien hacer casi cualquier cosa aun sin haberlo hecho nunca.",
+    "Sabes cocinar muy bien, (menos el arroz) y ya tienes un repertorio de platos muy complicados que a mucha gente le encantaría tener.",
+    "Me encanta hacerte rage baiting, pero me encanta más que me sigas el juego.",
+    "Aunque odie verte triste, me encanta que confíes lo suficiente en mí como para contarme lo que te pasa.",
+    "Tienes un cuerpo que cualquiera envidiaría. Eres muy atractiva.",
+    "Disfruto mucho de hacer repostería contigo, aunque me de miedo que te pases de harina.",
+    "Me siento muy seguro cuando viajo contigo porque eres una persona muy avispada y precavida.",
+    "Eres una persona muy respetuosa y educada, eres un ejemplo a seguir.",
+    "Me encanta que me pidas caricias y masajes, me encanta hacerte sentir bien.",
+    "Estás en una carrera que solo una persona muy inteligente y trabajadora podría haberse animado a estudiar.",
+    "Cantas, Bailas, Hablas Mil Idiomas, Cocinas, Estudias...Me encanta que puedas sacar tiempo para mí y aprecio cada segundo que pasamos juntos.",
+    "Me encanta que te intereses por las cosas que me gustan a mí aunque no te llamen la atención (a priori).",
+    "Me encanta abrazarte bajo el edredón cuando hace frío.",
+    "Tengo ganas de pasar Halloween contigo y hacer una maratón de Tim Burton.",
+    "Hazle Captura a esto para conseguir un vale de 15 minutos de masaje. 1/3",
+    "Hazle Captura a esto para conseguir un vale de 15 minutos de masaje. 2/3",
+    "Hazle Captura a esto para conseguir un vale de 15 minutos de masaje. 3/3",
+    "Tengo ganas de pasar la Navidad Contigo, ver peliculas bajo la manta y beber chocolate caliente (o café).",
+    "Tengo muchas ganas de vivir contigo y montar nuestro hogar juntos, decorarlo y llenarlo de vida.",
+    "Me encanta tener gustos tan parecidos a los tuyos, me siento muy identificado contigo.",
+    "Me encanta como escribes, porque tienes una letra preciosa y porque usas las palabras perfectas. Me encantan las notas que me dejas.",
+    "Me encanta que me digas que me quieres y que me lo demuestres con hechos.",
+    "Me encanta que me digas que soy guapo y que te guste mi cuerpo.",
+    "Contigo no me da miedo envejecer, porque podré revivir nuestro pasado y recordar todas las cosas que hemos hecho juntos.",
+    "Me encantó el Coreano al que fuimos. Pero siento decirte que el Kimchi no estuvo a la altura de mis expectativas.",
+    "Tengo muchas ganas de ir a un Mexicano, también quiero probar a cocinarlo en casa.",
+    "Iremos de viaje a Japón y a Corea, volveremos con 3 maletas cada uno llenas de Pokémon y Merchandising",
+    "Me encanta que no te guste la pizza Diavola porque así puedo comer más.",
+    "Tengo ganas de pasar la navidad en algún pueblo de Suiza, con nieve y chimenea.",
+    "Aprecio mucho que viajes a Italia con nosotros para ver a mi familia, y que te esfuerzes en hablar Italiano con ellos. Eso dice mucho de ti.",
+    "Tienes una facilidad increíble para aprender idiomas, me impresiona mucho.",
+    "Todos los que te conocen te quieren, eres una persona que cualquiera querría tener cerca.",
+    "Me encantan tus gestos corporales y las expresiones de tu cara cuando te concentras, cuando te ries o cuando me miras.",
+    "Me da gracia la cara que pones cuando te hago amagos de cosquillas, no pararé nunca de hacerlo.",
+    ];
+
+    const mensajeDiv = document.getElementById("mensaje");
+    const circulosDiv = document.getElementById("circulos");
+    const contadorDiv = document.getElementById("contador");
+    const resetBtn = document.getElementById("reset");
+
+    let vistos = JSON.parse(localStorage.getItem("mensajesVistos")) || [];
+    let ultimo = JSON.parse(localStorage.getItem("ultimoMensaje")) || null;
+
+    const ahora = Date.now();
+    const DURACION = 30 * 60 * 1000; // 30 minutos
+    let index;
+
+    if (ultimo && (ahora - ultimo.timestamp) < DURACION) {
+      index = ultimo.index;
+    } else {
+      index = Math.floor(Math.random() * mensajes.length);
+      ultimo = { index, timestamp: ahora };
+      localStorage.setItem("ultimoMensaje", JSON.stringify(ultimo));
+    }
+
+    mostrarMensaje(index, true);
+    construirCirculos();
+
+    function mostrarMensaje(i, marcarVisto) {
+      mensajeDiv.textContent = `${mensajes[i]} ( #${i + 1} )`;
+
+      if (marcarVisto && !vistos.includes(i)) {
+        vistos.push(i);
+        localStorage.setItem("mensajesVistos", JSON.stringify(vistos));
+        actualizarCirculo(i);
+      }
+    }
+
+    function construirCirculos() {
+      circulosDiv.innerHTML = "";
+      mensajes.forEach((_, i) => {
+        const c = document.createElement("div");
+        c.classList.add("circulo");
+        c.textContent = i + 1;
+
+        if (vistos.includes(i)) {
+          c.classList.add("activo");
+        }
+
+        c.addEventListener("click", () => {
+          if (vistos.includes(i)) {
+            mostrarMensaje(i, false);
+          }
+        });
+
+        circulosDiv.appendChild(c);
+      });
+    }
+
+    function actualizarCirculo(i) {
+      const c = circulosDiv.children[i];
+      c.classList.add("activo");
+    }
+
+    function actualizarContador() {
+      if (!ultimo) return;
+      const restante = DURACION - (Date.now() - ultimo.timestamp);
+
+      if (restante > 0) {
+        const minutos = Math.floor(restante / 60000);
+        const segundos = Math.floor((restante % 60000) / 1000);
+        contadorDiv.textContent = `Nuevo mensaje en: ${minutos}m ${segundos}s`;
+      } else {
+        contadorDiv.textContent = "¡Ya puedes obtener un nuevo mensaje recargando!";
+      }
+    }
+
+    setInterval(actualizarContador, 1000);
+    actualizarContador();
+
+    // Botón reset
+    resetBtn.addEventListener("click", () => {
+      localStorage.clear();
+      location.reload(); // recarga la página desde cero
+    });
+  </script>
+</body>
+</html>
