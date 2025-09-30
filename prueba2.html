@@ -181,7 +181,7 @@
     let ultimo = JSON.parse(localStorage.getItem("ultimoMensaje")) || null;
 
     const ahora = Date.now();
-    const DURACION = 5 * 60 * 1000; // 30 minutos
+    const DURACION = 0.1 * 60 * 1000; // 30 minutos
     let index;
 
     if (ultimo && (ahora - ultimo.timestamp) < DURACION) {
@@ -192,8 +192,9 @@
       localStorage.setItem("ultimoMensaje", JSON.stringify(ultimo));
     }
 
-    mostrarMensaje(index, true);
     construirCirculos();
+    mostrarMensaje(index, true);
+    
 
     function mostrarMensaje(i, marcarVisto) {
       mensajeDiv.textContent = `${mensajes[i]} ( #${i + 1} )`;
