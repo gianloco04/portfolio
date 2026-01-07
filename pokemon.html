@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Card Collection Tracker</title>
+    <link rel="stylesheet" href="pokemon.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="circle-container">
+            <div class="inner-circle">
+                <div class="inner-inner-circle"></div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <main id="sets-container"></main>
+    </main>
+    <script>
+    const API_KEY = 'c75aa8b8-3427-484b-befd-9bf0e195703c';
+
+    async function loadPokemonSets() {
+        const container = document.getElementById('sets-container');
+
+        try {
+            const response = await fetch('https://api.pokemontcg.io/v2/sets', {
+                headers: {
+                    'X-Api-Key': API_KEY
+                }
+            });
+
+            const data = await response.json();
+
+            // Ordenar por fecha de salida (opcional pero recomendado)
+            data.data.sort((a, b) => new Date(a.releaseDate) - new Date(b.releaseDate));
+
+            data.data.forEach(set => {
+                const card = document.createElement('div');
+                card.classList.add('set-card');
+
+                card.innerHTML = `
+                    <img src="${set.images.logo}" alt="${set.name}">
+                    <h3>${set.name}</h3>
+                    <p>${set.series}</p>
+                    <span>${set.releaseDate}</span>
+                `;
+
+                container.appendChild(card);
+            });
+
+        } catch (error) {
+            console.error('Error cargando expansiones:', error);
+        }
+    }
+
+    loadPokemonSets();
+    </script>
+</body>
