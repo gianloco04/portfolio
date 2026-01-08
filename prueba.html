@@ -1,689 +1,304 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Dots Grid - Enhanced</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon TCG Cards</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      color: #ffcb05;
+      font-size: 3rem;
+      text-shadow: 3px 3px 0 #3d7dca, 6px 6px 0 #003a70;
+      margin-bottom: 20px;
+    }
+
+    .search-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 14px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      width: 300px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      outline: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus {
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(255, 203, 5, 0.4);
+    }
+
+    button {
+      padding: 14px 32px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-search {
+      background: linear-gradient(135deg, #ffcb05, #ff9500);
+      color: #1a1a2e;
+    }
+
+    .btn-random {
+      background: linear-gradient(135deg, #3d7dca, #003a70);
+      color: white;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .loading {
+      text-align: center;
+      color: white;
+      font-size: 1.5rem;
+      padding: 60px;
+    }
+
+    .loading::after {
+      content: '';
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: '.'; }
+      40% { content: '..'; }
+      60%, 100% { content: '...'; }
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 20px 0;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotateY(5deg);
+      box-shadow: 0 20px 40px rgba(255, 203, 5, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 220px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s;
+    }
+
+    .card:hover img {
+      transform: scale(1.05);
+    }
+
+    .card-name {
+      color: #ffcb05;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 15px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-info {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    .card-rarity {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      margin-top: 10px;
+      background: rgba(255, 203, 5, 0.2);
+      color: #ffcb05;
+      border: 1px solid #ffcb05;
+    }
+
+    .error {
+      text-align: center;
+      color: #ff6b6b;
+      font-size: 1.2rem;
+      padding: 40px;
+      background: rgba(255, 107, 107, 0.1);
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    .no-results {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1.2rem;
+      padding: 60px;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 60px;
+      padding: 20px;
+    }
+
+    footer a {
+      color: #ffcb05;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
-<style>
-  * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  background-color: #e5e5e5;
-  padding: 2rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-.container {
-  max-width: 80rem;
-  margin: 0 auto;
-}
-
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.btn {
-  padding: 0.5rem;
-  height: 50px;
-  min-width: 50px;
-  border: none;
-  border-radius: 2rem;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: all 0.5s;
-  border: 1px solid #aaa;
-  background: #e5e5e5;
-  color: #2c2c2c;
-}
-
-.btn:hover {
-  background: #2c2c2c;
-  color: white;
-}
-
-.btn-secondary {
-  background-color: #2c2c2c;
-  color: white;
-}
-
-.btn-wide {
-  width: auto;
-  padding: 0.5rem 1rem;
-}
-
-.grids-container {
-  display: flex;
-  gap: 4rem;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-
-.grid-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.grid-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #2c2c2c;
-}
-
-.grid-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-.grid {
-  display: inline-grid;
-  grid-template-columns: repeat(15, 30px);
-  grid-template-rows: repeat(15, 30px);
-  gap: 0;
-  background-color: white;
-}
-
-.cell {
-  position: relative;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.grid.readonly .cell {
-  cursor: default;
-}
-
-.cell-layer {
-  position: absolute;
-  inset: 0;
-}
-
-.fondo {
-  z-index: 1;
-}
-
-.fondo2 {
-  z-index: 2;
-  background-color: #e5e5e5;
-}
-
-.punto {
-  z-index: 3;
-  background-color: #aaa;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.seleccion {
-  z-index: 4;
-  background-color: #2c2c2c;
-}
-
-.description {
-  margin-top: 2rem;
-  text-align: center;
-  color: #6b7280;
-}
-
-.description p {
-  font-size: 0.875rem;
-}
-
-.congratulations {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #2c2c2c;
-  color: white;
-  padding: 2rem;
-  border-radius: 1rem;
-  font-size: 1.5rem;
-  font-weight: bold;
-  z-index: 1000;
-  display: none;
-  text-align: center;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-}
-
-.pattern-info {
-  margin-top: 1rem;
-  text-align: center;
-  color: #6b7280;
-  font-size: 0.875rem;
-}
-
-
-/* Por ejemplo, en pantallas menores de 600px */
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: repeat(15, 20px);
-    grid-template-rows: repeat(15, 20px);
-  }
-
-  .cell {
-    width: 20px;
-    height: 20px;
-  }
-}
-
-/* Y aún más pequeño en <400px */
-@media (max-width: 400px) {
-  .grid {
-    grid-template-columns: repeat(15, 15px);
-    grid-template-rows: repeat(15, 15px);
-  }
-
-  .cell {
-    width: 15px;
-    height: 15px;
-  }
-}
-
-
-</style>
 <body>
-    <div class="container">
+  <div class="container">
+    <header>
+      <h1>⚡ Pokémon TCG Cards</h1>
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Buscar Pokémon... (ej: Pikachu, Charizard)">
+        <button class="btn-search" onclick="searchCards()">🔍 Buscar</button>
+        <button class="btn-random" onclick="loadRandomCards()">🎲 Aleatorio</button>
+      </div>
+    </header>
+
+    <main id="cardsContainer">
+      <div class="loading">Cargando cartas Pokémon</div>
+    </main>
+
+    <footer>
+      <p>Datos proporcionados por <a href="https://pokemontcg.io/" target="_blank">Pokémon TCG API</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const API_URL = 'https://api.pokemontcg.io/v2/cards';
+    const cardsContainer = document.getElementById('cardsContainer');
+    const searchInput = document.getElementById('searchInput');
+
+    // Buscar al presionar Enter
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') searchCards();
+    });
+
+    // Cargar cartas aleatorias al inicio
+    window.onload = loadRandomCards;
+
+    async function loadRandomCards() {
+      cardsContainer.innerHTML = '<div class="loading">Cargando cartas Pokémon</div>';
+      
+      try {
+        // Obtener cartas aleatorias usando un page random
+        const randomPage = Math.floor(Math.random() * 100) + 1;
+        const response = await fetch(`${API_URL}?page=${randomPage}&pageSize=12`);
         
-        <!-- Control Buttons -->
-        <div class="controls">
-            <button id="clearGrid" class="btn btn-default"><i class="fa-solid fa-trash"></i></button>
-            <button id="toggleDots" class="btn btn-default"><i class="fa-solid fa-eye"></i></button>
-            <button id="toggleSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-square"></i></button>
-            <button id="toggleNotSelectedBorderRadius" class="btn btn-default"><i class="fa-solid fa-circle"></i></button>
-            <button id="submitPattern" class="btn btn-success btn-wide">Enviar Dibujo</button>
-            <input type="date" id="fecha" class="btn btn-default"><button id="secret" class="btn btn-default"><i class="fa-solid fa-lock"></i></button>
-        </div>
-
-        <script>
-          const fechaInput = document.getElementById("fecha");
-          const boton = document.getElementById("secret");
-          const icono = boton.querySelector("i");
-
-          fechaInput.addEventListener("change", () => {
-            // El formato del input type="date" es YYYY-MM-DD
-            if (fechaInput.value === "2022-04-18") {
-              icono.classList.remove("fa-lock");
-              icono.classList.add("fa-lock-open");
-
-              // añadimos la redirección al click
-              boton.onclick = () => {
-                window.location.href = "Paula.html";
-              };
-            } else {
-              // si no es la fecha correcta, dejamos el lock cerrado
-              icono.classList.remove("fa-lock-open");
-              icono.classList.add("fa-lock");
-              boton.onclick = null; // sin acción
-            }
-          });
-        </script>
-
-        <!-- Grids Container -->
-        <div class="grids-container">
-            <!-- Editable Grid -->
-            <div class="grid-section">
-                <h2 class="grid-title">Tu Dibujo</h2>
-                <div class="grid-wrapper">
-                    <div id="editableGrid" class="grid"></div>
-                </div>
-                <div class="pattern-info">
-                    <p>Mantén presionado para dibujar</p>
-                </div>
-            </div>
-
-            <!-- Display Grid -->
-            <div class="grid-section">
-                <h2 class="grid-title">Dibujo a Replicar</h2>
-                <div class="grid-wrapper">
-                    <div id="displayGrid" class="grid readonly"></div>
-                </div>
-                <div class="pattern-info">
-                    <p id="patternCount">Patrones guardados: 0</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Congratulations Modal -->
-        <div id="congratulations" class="congratulations">
-            <div>¡Felicidades!</div>
-            <div style="font-size: 1rem; margin-top: 0.5rem;">¡Has replicado el patrón correctamente!</div>
-        </div>
-    </div>
-
-    <script>
-      const GRID_SIZE = 15
-      const CELL_SIZE = 30
-
-class EnhancedDotsGrid {
-  constructor() {
-    this.editableGrid = this.initializeGrid()
-    this.displayGrid = this.initializeGrid()
-    this.showDots = true
-    this.enableSelectedBorderRadius = true
-    this.enableNotSelectedBorderRadius = true
-    this.isDrawing = false
-    this.drawingMode = null // 'select' or 'deselect'
-    
-    // Pattern storage
-    this.patterns = [
-      // Some default patterns to start with
-      '000000000000000000000000000000000000000000000000110000011000001001000100100000000010000000000000010000000000000010000000000001010100000000000111000000001000000000100000110000011000000001111100000000000000000000000000000000000',
-      '000000000000000000000000000000000000000000000000000000000000000111111101010000100000100100000101110101100000101010110100000100010100100000111110100100000100000100100111111111111111000000000000000000000000000000000000000000000',
-      '000000000000000000000000001000010101000011100111111100111110010001000010100010101000010100010101111111100010001000000100111011101010101110101010101011100000000000001101010010010101101010101010101100000101000001111111111111111',
-      '000000000000000000000000000000000011111111100000011111111100000000001100000001111111110000001111111110000000000010000000000011111100000000000001000000000000011101000000000000011100000000000111110000000000011100000000000011100',
-      '000000000000000000000000000000000000000000000001111100000000001111111100000001111111111110001111111111100001111111111100001000011100000001000000000000001000000000000001000000000000001000000000000001000000000000001000000000000',
-      '000000000000000000000111000000000011010110000000100010001000001000010000100001000010000100010000010000010010000010000010010000101000010001001000100100001010000010100000100000001000000011000110000000000111000000000000000000000',
-      '000000010000000000000111000000000001101100000000111000111000000100101001000001101010101100011010101010110110001000100011011010101010110001101010101100000100101001000000111000111000000001101100000000000111000000000000010000000',
-      '000000000000000000000000000000000000000000000000000000000000000111111111000000111111111000000111111111000000111111111000000111111111000000000010000000000000111001001000000000000100000111111101100000111111101100000000000000000',
-      '000000000000000000000000001000000000000010000000000001100100000000111111000000011111111000000111111110000001111111111110011111111111110001111111111100000100111111000000000111110000000000011100000000000001000000000000000000000'
-    ]
-    this.currentDisplayPattern = ''
-
-    this.init()
-  }
-
-  initializeGrid() {
-    return Array(GRID_SIZE)
-      .fill(null)
-      .map(() =>
-        Array(GRID_SIZE)
-          .fill(null)
-          .map(() => ({
-            selected: false,
-            borderRadius: {
-              topLeft: false,
-              topRight: false,
-              bottomLeft: false,
-              bottomRight: false,
-            },
-          })),
-      )
-  }
-
-  init() {
-    this.createGrids()
-    this.setupEventListeners()
-    this.showRandomPattern()
-    this.updatePatternCount()
-    this.patterns = JSON.parse(localStorage.getItem('patterns') || '[]')
-  }
-
-  createGrids() {
-    this.createGrid('editableGrid', this.editableGrid, true)
-    this.createGrid('displayGrid', this.displayGrid, false)
-  }
-
-  createGrid(containerId, gridData, isEditable) {
-    const gridElement = document.getElementById(containerId)
-    gridElement.innerHTML = ""
-
-    for (let row = 0; row < GRID_SIZE; row++) {
-      for (let col = 0; col < GRID_SIZE; col++) {
-        const cell = document.createElement("div")
-        cell.className = "cell"
-        cell.dataset.row = row
-        cell.dataset.col = col
-
-        // FONDO layer
-        const fondoLayer = document.createElement("div")
-        fondoLayer.className = "cell-layer fondo"
-
-        // FONDO 2 layer
-        const fondo2Layer = document.createElement("div")
-        fondo2Layer.className = "cell-layer fondo2"
-
-        // PUNTO layer
-        const puntoLayer = document.createElement("div")
-        puntoLayer.className = "cell-layer punto"
-
-        // SELECCION layer
-        const seleccionLayer = document.createElement("div")
-        seleccionLayer.className = "cell-layer seleccion"
-
-        cell.appendChild(fondoLayer)
-        cell.appendChild(fondo2Layer)
-        cell.appendChild(puntoLayer)
-        cell.appendChild(seleccionLayer)
-
-        if (isEditable) {
-          // Mouse events for drag functionality
-          cell.addEventListener("mousedown", (e) => this.handleMouseDown(e, row, col))
-          cell.addEventListener("mouseenter", () => this.handleMouseEnter(row, col))
-          cell.addEventListener("mouseup", () => this.handleMouseUp())
-          
-          // Prevent context menu on right click
-          cell.addEventListener("contextmenu", (e) => e.preventDefault())
-        }
-
-        gridElement.appendChild(cell)
+        if (!response.ok) throw new Error('Error al cargar las cartas');
+        
+        const data = await response.json();
+        displayCards(data.data);
+      } catch (error) {
+        showError(error.message);
       }
     }
 
-    // Global mouse events for drag functionality
-    if (isEditable) {
-      document.addEventListener("mouseup", () => this.handleMouseUp())
-    }
-
-    this.updateGridDisplay(containerId, gridData)
-  }
-
-  setupEventListeners() {
-    document.getElementById("clearGrid").addEventListener("click", () => this.clearEditableGrid())
-    document.getElementById("toggleDots").addEventListener("click", () => this.toggleDots())
-    document
-      .getElementById("toggleSelectedBorderRadius")
-      .addEventListener("click", () => this.toggleSelectedBorderRadius())
-    document
-      .getElementById("toggleNotSelectedBorderRadius")
-      .addEventListener("click", () => this.toggleNotSelectedBorderRadius())
-    document.getElementById("submitPattern").addEventListener("click", () => this.submitPattern())
-  }
-
-  handleMouseDown(e, row, col) {
-    e.preventDefault()
-    this.isDrawing = true
-    
-    // Determine drawing mode based on current cell state
-    this.drawingMode = this.editableGrid[row][col].selected ? 'deselect' : 'select'
-    
-    // Apply the action to the clicked cell
-    this.editableGrid[row][col].selected = this.drawingMode === 'select'
-    
-    this.updateBorderRadius(this.editableGrid)
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-    this.checkPatternMatch()
-  }
-
-  handleMouseEnter(row, col) {
-    if (!this.isDrawing) return
-    
-    // Apply the drawing mode to the entered cell
-    this.editableGrid[row][col].selected = this.drawingMode === 'select'
-    
-    this.updateBorderRadius(this.editableGrid)
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-    this.checkPatternMatch()
-  }
-
-  handleMouseUp() {
-    this.isDrawing = false
-    this.drawingMode = null
-  }
-
-  updateBorderRadius(gridData) {
-    for (let row = 0; row < GRID_SIZE; row++) {
-      for (let col = 0; col < GRID_SIZE; col++) {
-        const cell = gridData[row][col]
-        const isSelected = cell.selected
-
-        // Reset border radius
-        cell.borderRadius = {
-          topLeft: false,
-          topRight: false,
-          bottomLeft: false,
-          bottomRight: false,
-        }
-
-        const shouldApplyBorderRadius =
-          (isSelected && this.enableSelectedBorderRadius) || (!isSelected && this.enableNotSelectedBorderRadius)
-
-        if (shouldApplyBorderRadius) {
-          // Get neighbors (treating out-of-bounds as opposite state)
-          const topNeighbor = row > 0 ? gridData[row - 1][col].selected : isSelected
-          const bottomNeighbor = row < GRID_SIZE - 1 ? gridData[row + 1][col].selected : isSelected
-          const leftNeighbor = col > 0 ? gridData[row][col - 1].selected : isSelected
-          const rightNeighbor = col < GRID_SIZE - 1 ? gridData[row][col + 1].selected : isSelected
-
-          // Get diagonal neighbors
-          const topLeftDiagonal = row > 0 && col > 0 ? gridData[row - 1][col - 1].selected : !isSelected
-          const topRightDiagonal = row > 0 && col < GRID_SIZE - 1 ? gridData[row - 1][col + 1].selected : !isSelected
-          const bottomLeftDiagonal = row < GRID_SIZE - 1 && col > 0 ? gridData[row + 1][col - 1].selected : !isSelected
-          const bottomRightDiagonal =
-            row < GRID_SIZE - 1 && col < GRID_SIZE - 1 ? gridData[row + 1][col + 1].selected : !isSelected
-
-          if (isSelected) {
-            // Para casillas SELECCIONADAS: border radius cuando una esquina está en contacto con 3 casillas NO seleccionadas
-            if (topNeighbor !== isSelected && leftNeighbor !== isSelected && topLeftDiagonal !== isSelected) {
-              cell.borderRadius.topLeft = true
-            }
-            if (topNeighbor !== isSelected && rightNeighbor !== isSelected && topRightDiagonal !== isSelected) {
-              cell.borderRadius.topRight = true
-            }
-            if (bottomNeighbor !== isSelected && leftNeighbor !== isSelected && bottomLeftDiagonal !== isSelected) {
-              cell.borderRadius.bottomLeft = true
-            }
-            if (bottomNeighbor !== isSelected && rightNeighbor !== isSelected && bottomRightDiagonal !== isSelected) {
-              cell.borderRadius.bottomRight = true
-            }
-          } else {
-            // Para casillas NO SELECCIONADAS: border radius cuando una esquina está en contacto con 2 casillas SELECCIONADAS contiguas
-            if (topNeighbor !== isSelected && leftNeighbor !== isSelected) {
-              cell.borderRadius.topLeft = true
-            }
-            if (topNeighbor !== isSelected && rightNeighbor !== isSelected) {
-              cell.borderRadius.topRight = true
-            }
-            if (bottomNeighbor !== isSelected && leftNeighbor !== isSelected) {
-              cell.borderRadius.bottomLeft = true
-            }
-            if (bottomNeighbor !== isSelected && rightNeighbor !== isSelected) {
-              cell.borderRadius.bottomRight = true
-            }
-          }
-        }
-      }
-    }
-  }
-
-  getBorderRadiusStyle(borderRadius) {
-    return {
-      borderTopLeftRadius: borderRadius.topLeft ? "8px" : "0px",
-      borderTopRightRadius: borderRadius.topRight ? "8px" : "0px",
-      borderBottomLeftRadius: borderRadius.bottomLeft ? "8px" : "0px",
-      borderBottomRightRadius: borderRadius.bottomRight ? "8px" : "0px",
-    }
-  }
-
-  updateGridDisplay(containerId, gridData) {
-    const gridElement = document.getElementById(containerId)
-    const cells = gridElement.querySelectorAll(".cell")
-
-    cells.forEach((cellElement, index) => {
-      const row = Math.floor(index / GRID_SIZE)
-      const col = index % GRID_SIZE
-      const cellData = gridData[row][col]
-
-      const fondoLayer = cellElement.querySelector(".fondo")
-      const fondo2Layer = cellElement.querySelector(".fondo2")
-      const puntoLayer = cellElement.querySelector(".punto")
-      const seleccionLayer = cellElement.querySelector(".seleccion")
-
-      // Update FONDO layer
-      fondoLayer.style.backgroundColor = cellData.selected ? "#e5e5e5" : "#2c2c2c"
-
-      // Update FONDO 2 layer
-      if (!cellData.selected) {
-        fondo2Layer.style.display = "block"
-        const borderStyle = this.getBorderRadiusStyle(cellData.borderRadius)
-        Object.assign(fondo2Layer.style, borderStyle)
-      } else {
-        fondo2Layer.style.display = "none"
-      }
-
-      // Update PUNTO layer
-      if (!cellData.selected && this.showDots) {
-        puntoLayer.style.display = "block"
-      } else {
-        puntoLayer.style.display = "none"
-      }
-
-      // Update SELECCION layer
-      if (cellData.selected) {
-        seleccionLayer.style.display = "block"
-        const borderStyle = this.getBorderRadiusStyle(cellData.borderRadius)
-        Object.assign(seleccionLayer.style, borderStyle)
-      } else {
-        seleccionLayer.style.display = "none"
-      }
-    })
-  }
-
-  clearEditableGrid() {
-    this.editableGrid = this.initializeGrid()
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-  }
-
-  toggleDots() {
-    this.showDots = !this.showDots
-    const button = document.getElementById("toggleDots")
-    button.innerHTML = this.showDots ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>'
-    button.className = this.showDots ? "btn btn-default" : "btn btn-secondary"
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-    this.updateGridDisplay('displayGrid', this.displayGrid)
-  }
-
-  toggleSelectedBorderRadius() {
-    this.enableSelectedBorderRadius = !this.enableSelectedBorderRadius
-    const button = document.getElementById("toggleSelectedBorderRadius")
-    button.innerHTML = this.enableSelectedBorderRadius
-      ? '<i class="fa-solid fa-square"></i>'
-      : '<i class="fa-regular fa-square"></i>'
-    button.className = this.enableSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
-    this.updateBorderRadius(this.editableGrid)
-    this.updateBorderRadius(this.displayGrid)
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-    this.updateGridDisplay('displayGrid', this.displayGrid)
-  }
-
-  toggleNotSelectedBorderRadius() {
-    this.enableNotSelectedBorderRadius = !this.enableNotSelectedBorderRadius
-    const button = document.getElementById("toggleNotSelectedBorderRadius")
-    button.innerHTML = this.enableNotSelectedBorderRadius
-      ? '<i class="fa-solid fa-circle"></i>'
-      : '<i class="fa-regular fa-circle"></i>'
-    button.className = this.enableNotSelectedBorderRadius ? "btn btn-default" : "btn btn-secondary"
-    this.updateBorderRadius(this.editableGrid)
-    this.updateBorderRadius(this.displayGrid)
-    this.updateGridDisplay('editableGrid', this.editableGrid)
-    this.updateGridDisplay('displayGrid', this.displayGrid)
-  }
-
-  // Convert grid to binary string
-  gridToBinaryString(gridData) {
-    let binaryString = ''
-    for (let row = 0; row < GRID_SIZE; row++) {
-      for (let col = 0; col < GRID_SIZE; col++) {
-        binaryString += gridData[row][col].selected ? '1' : '0'
-      }
-    }
-    return binaryString
-  }
-
-  // Convert binary string to grid
-  binaryStringToGrid(binaryString) {
-    const gridData = this.initializeGrid()
-    for (let i = 0; i < binaryString.length && i < GRID_SIZE * GRID_SIZE; i++) {
-      const row = Math.floor(i / GRID_SIZE)
-      const col = i % GRID_SIZE
-      gridData[row][col].selected = binaryString[i] === '1'
-    }
-    return gridData
-  }
-
-  // Submit current pattern
-  submitPattern() {
-    const binaryString = this.gridToBinaryString(this.editableGrid)
-    
-    // Don't add empty patterns or duplicates
-    if (binaryString.includes('1') && !this.patterns.includes(binaryString)) {
-      this.patterns.push(binaryString)
-      this.updatePatternCount()
+    async function searchCards() {
+      const query = searchInput.value.trim();
       
-      // Show success feedback
-      const button = document.getElementById("submitPattern")
-      const originalText = button.innerHTML
-      button.innerHTML = '¡Guardado!'
-      button.className = 'btn btn-success btn-wide'
+      if (!query) {
+        loadRandomCards();
+        return;
+      }
 
-      console.log(binaryString)
-      localStorage.setItem('patterns', JSON.stringify(this.patterns))
-      
-      setTimeout(() => {
-        button.innerHTML = originalText
-      }, 1500)
+      cardsContainer.innerHTML = '<div class="loading">Buscando cartas</div>';
+
+      try {
+        const response = await fetch(`${API_URL}?q=name:${encodeURIComponent(query)}*&pageSize=20`);
+        
+        if (!response.ok) throw new Error('Error en la búsqueda');
+        
+        const data = await response.json();
+        
+        if (data.data.length === 0) {
+          cardsContainer.innerHTML = `<div class="no-results">No se encontraron cartas para "${query}" 😢</div>`;
+          return;
+        }
+        
+        displayCards(data.data);
+      } catch (error) {
+        showError(error.message);
+      }
     }
-  }
 
-  // Show random pattern from the list
-  showRandomPattern() {
-    if (this.patterns.length === 0) return
-    
-    let randomPattern
-    do {
-      randomPattern = this.patterns[Math.floor(Math.random() * this.patterns.length)]
-    } while (randomPattern === this.currentDisplayPattern && this.patterns.length > 1)
-    
-    this.currentDisplayPattern = randomPattern
-    this.displayGrid = this.binaryStringToGrid(randomPattern)
-    this.updateBorderRadius(this.displayGrid)
-    this.updateGridDisplay('displayGrid', this.displayGrid)
-  }
+    function displayCards(cards) {
+      if (!cards || cards.length === 0) {
+        cardsContainer.innerHTML = '<div class="no-results">No hay cartas disponibles</div>';
+        return;
+      }
 
-  // Check if editable grid matches display grid
-  checkPatternMatch() {
-    const editableBinary = this.gridToBinaryString(this.editableGrid)
-    const displayBinary = this.gridToBinaryString(this.displayGrid)
-    
-    if (editableBinary === displayBinary && editableBinary.includes('1')) {
-      this.showCongratulations()
-      // Show new pattern after a delay
-      setTimeout(() => {
-        this.showRandomPattern()
-      }, 2000)
+      const cardsHTML = cards.map(card => `
+        <div class="card">
+          <img src="${card.images.small}" alt="${card.name}" loading="lazy">
+          <div class="card-name">${card.name}</div>
+          <div class="card-info">${card.set.name}</div>
+          ${card.rarity ? `<span class="card-rarity">${card.rarity}</span>` : ''}
+        </div>
+      `).join('');
+
+      cardsContainer.innerHTML = `<div class="cards-grid">${cardsHTML}</div>`;
     }
-  }
 
-  // Show congratulations message
-  showCongratulations() {
-    const congratsElement = document.getElementById("congratulations")
-    congratsElement.style.display = "block"
-    
-    setTimeout(() => {
-      congratsElement.style.display = "none"
-    }, 3000)
-  }
-
-  // Update pattern count display
-  updatePatternCount() {
-    document.getElementById("patternCount").textContent = `Patrones guardados: ${this.patterns.length}`
-  }
-}
-
-// Initialize the enhanced grid when the page loads
-document.addEventListener("DOMContentLoaded", () => {
-  new EnhancedDotsGrid()
-})
-
-    </script>
+    function showError(message) {
+      cardsContainer.innerHTML = `<div class="error">❌ ${message}<br><br><button class="btn-search" onclick="loadRandomCards()">Intentar de nuevo</button></div>`;
+    }
+  </script>
 </body>
 </html>
