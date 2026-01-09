@@ -11,12 +11,32 @@
     <header>
         <div class="circle-container">
             <div class="inner-circle">
-                <div class="inner-inner-circle"></div>
+                <a href="pokemon.html" class="inner-inner-circle"></a>
             </div>
         </div>
     </header>
-    <main>
-        <h1 id="set-title">Loading set...</h1>
-        <div id="cards-container"></div>
+    <main id="set-cards">
+        <h1 id="set-title"></h1>
+        <div id="set-content">
+            <div id="cards-container"></div>
+            <div class="set-controls">
+                <button id="toggle-opacity-btn">ALL</button>
+                <div id="type-buttons-container">
+                    <button data-type="dark"><img src="Types/no-bg/dark.png" alt="dark"></button>
+                    <button data-type="fairy"><img src="Types/no-bg/fairy.png" alt="fairy"></button>
+                    <button data-type="fire"><img src="Types/no-bg/fire.png" alt="fire"></button>
+                    <button data-type="water"><img src="Types/no-bg/water.png" alt="water"></button>
+                    <button data-type="dragon"><img src="Types/no-bg/dragon.png" alt="water"></button>
+                    <button data-type="electric"><img src="Types/no-bg/electric.png" alt="water"></button>
+                    <button data-type="fighting"><img src="Types/no-bg/fighting.png" alt="water"></button>
+                    <button data-type="steel"><img src="Types/no-bg/steel.png" alt="water"></button>
+                    <button data-type="psychic"><img src="Types/no-bg/psychic.png" alt="water"></button>
+                    <button data-type="normal"><img src="Types/no-bg/normal.png" alt="water"></button>
+                    <button data-type="grass"><img src="Types/no-bg/grass.png" alt="water"></button>
+
+                </div>
+
+            </div>
+        </div>
     </main>
-<script src="pokemon.js"></script>
+<script src="set.js"></script>

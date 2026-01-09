@@ -1,13 +1,17 @@
+/* =======================
+   VARIABLES GLOBALES
+======================= */
 :root {
     --primary-color: #e3350d;
     --secondary-color: #ffcc00;
     --background-color: #f8f9fa;
     --card-bg: #ffffff;
-    --text-color: #333333;
     --shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    --transition: all 0.3s ease;
 }
 
+/* =======================
+   RESET Y GLOBAL
+======================= */
 * {
     margin: 0;
     padding: 0;
@@ -17,9 +21,11 @@
 
 body {
     background: var(--background-color);
-    color: var(--text-color);
 }
 
+/* =======================
+   HEADER
+======================= */
 header {
     position: relative;
     color: white;
@@ -28,10 +34,18 @@ header {
     align-items: end;
     justify-content: center;
     z-index: 10;
-    background: var(--background-color);
+    background: radial-gradient(
+        circle at 50% 80%,
+        #FD5557 0%,
+        #F04A4C 35%,
+        #D94446 70%
+    );
     border-bottom: #111 10px solid;
 }
 
+/* =======================
+   CÍRCULOS (UI)
+======================= */
 .circle-container {
     position: absolute;
     bottom: 0;
@@ -58,60 +72,168 @@ header {
 }
 
 .inner-inner-circle {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     box-shadow: var(--shadow);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
 
+/* =======================
+   MAIN / CONTENEDORES
+======================= */
 main {
-    height: 200vh;
     padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(
+        circle at 50% 10%,
+        var(--background-color) 0%,
+        #E9ECEF 35%,
+        #DEE2E6 70%
+    );
+}
+
+.sets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 30px;
+    padding: 2rem 12rem;
+    margin-top: 4rem;
+    width: 100%;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 140px); /* columnas fijas */
+    gap: 20px;
+    padding: 2rem;
+    width: 80%;
+    border-radius: 20px;
+    justify-content: center; /* centra las columnas si no llenan todo */
+    justify-items: center;
+}
+
+
+/* =======================
+   SETS PAGE
+======================= */
+.set-card {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+    background: rgba(255,255,255, 0.88);
+    background-blend-mode: lighten;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+
+.set-card .logo {
+    max-height: 80px;
+    max-width: 120px;
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+    z-index: 2;
+    position: relative;
+    object-fit: contain;
+}
+
+.set-card.delete:hover {
+    background-color: #D94446;
+}
+
+/* =======================
+   CARDS PAGE
+======================= */
+
+#set-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 6rem;
+    font-size: 1rem;
+}
+
+#set-title .set-logo {
+    width: 150px;   /* tamaño del logo */
+    height: 150px;
+    object-fit: contain;
+}
+
+#set-content {
+    display: flex;
+    gap: 2rem;
+}
+
+#cards-container {
+    flex: 3;
+}
+
+#set-controls {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.card {
+    width: 150px;
+    height: 202px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.card img {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain;
+    opacity: 0.5;
+}
+
+.card:hover {
+    transform: translateY(-5%);
+}
+
+#type-buttons-container {
     display: flex;
     flex-direction: column;
 }
 
-.sets-grid, .cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 40px;
-  padding: 2rem;
+#type-buttons-container button {
+    background: #fff;
+    padding: 0;
+    margin: 10px;
 }
 
-.set-card {
-  position: relative;
-  border-radius: 20px;
-  border-top: 5px solid #111;
-  border-bottom: 5px solid #111;
-  overflow: hidden;
-  text-align: center;
-  height: 100px;
-
-  background-position: center;
-  background-color: rgba(248,249,250, 0.9);
-  background-blend-mode: lighten; /* puedes probar lighten o overlay */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-out;
-  cursor: pointer;
+#type-buttons-container button img {
+    width: 15%;
+    height: 15%;
 }
 
-.set-card .logo {
-  max-height: 80px;  /* altura máxima uniforme */
-  max-width: 120px;  /* anchura máxima uniforme */
-  width: auto;
-  height: auto;
-  margin-bottom: 10px;
-  z-index: 2;
-  position: relative;
-  object-fit: contain; /* mantiene proporción */
-}
-
+/* =======================
+   BOTONES
+======================= */
 button {
-    background-color: #111;
+    background: linear-gradient(
+        110deg,
+        #111111 0%,
+        #555 100%
+    );
     border: none;
     padding: 1rem 1.5rem;
     color: var(--background-color);
@@ -123,34 +245,54 @@ button {
     width: 16rem;
     align-self: center;
     margin-top: 4rem;
+    cursor: pointer;
 }
 
-button:hover, .inner-inner-circle:hover, .set-card:hover {
-    transform: scale(1.08);
-    color: black;
-    background:#48faf1;
+#add-remove-btn {
+    padding: 1rem 1.25rem;
+    width: auto;
+}
+
+#add-remove-btn.delete-mode {
+    background: linear-gradient(
+        110deg,
+        #D94446 0%,
+        #FD5557 70%
+    );
+    color: #111;
+}
+
+#add-remove-btn.add-mode {
+    background: #56db79;
+}
+
+/* =======================
+   HOVER GENERAL
+======================= */
+button:hover, 
+.inner-inner-circle:hover, 
+.set-card:hover {
+    transform: scale(1.05);
+    color: white;
+    background: linear-gradient(
+        110deg,
+        #00d6f7 0%,
+        #48faf1 100%
+    );
+    background-color: #48faf1;
 }
 
 button:hover {
     transform: scale(1.02);
 }
 
-.card {
-  text-align: center;
-  transition: all 0.2s ease-out;
-  cursor: pointer;
-}
-
-.card:hover {
-    transform: scale(1.1) rotateZ(-5deg);
-}
-
-.card img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-h1 {
-    align-self: center;
-    margin: 2rem;
+/* =======================
+   MEDIA QUERIES
+======================= */
+@media (max-width: 1000px) {
+    .sets-grid {
+        width: 100%;
+        padding: 0;
+        gap: 20px;
+    }
 }
