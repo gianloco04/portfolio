@@ -53,8 +53,7 @@ function displayTCGDexSets(sets) {
   }
 
   const html = sets.map(set => `
-    <div class="set-card" data-set-id="${set.id}" data-set-name="${set.name}"
-         style="background-image: url('${set.logo}.png')">
+    <div class="set-card" data-set-id="${set.id}" data-set-name="${set.name}" style="--bg: url('${set.logo}.png')">
       <img class="logo" src="${set.logo}.png" alt="${set.name}">
     </div>
   `).join("");

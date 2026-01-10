@@ -124,28 +124,43 @@ main {
     overflow: hidden;
     text-align: center;
     height: 100px;
-    background-size: cover;
-    background-position: center;
-    background: rgba(255,255,255, 0.88);
-    background-blend-mode: lighten;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: all 0.2s ease-out;
     cursor: pointer;
+
+    /* quitamos background-inline y lo pasamos a la variable */
+    /* opcional: fondo de respaldo */
+    background: white;
 }
 
+/* Pseudo-elemento para el background en B/N */
+.set-card::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top:0; left:0; right:0; bottom:0 */
+    background-image: var(--bg); /* la imagen viene de style="--bg:url(...)" */
+    background-size: 200%;
+    background-repeat: no-repeat;
+    filter: grayscale(70%); /* blanco y negro */
+    opacity: 0.1;
+    transition: all 0.3s ease-out;
+}
+
+/* Logo encima del pseudo-elemento */
 .set-card .logo {
     max-height: 80px;
     max-width: 120px;
     width: auto;
     height: auto;
-    margin-bottom: 10px;
-    z-index: 2;
+    z-index: 2; /* encima del background */
     position: relative;
     object-fit: contain;
+    transition: all 0.2s ease-out;
 }
+
 
 .set-card.delete:hover {
     background-color: #D94446;
@@ -270,8 +285,7 @@ button {
    HOVER GENERAL
 ======================= */
 button:hover, 
-.inner-inner-circle:hover, 
-.set-card:hover {
+.inner-inner-circle:hover {
     transform: scale(1.05);
     color: white;
     background: linear-gradient(
@@ -279,7 +293,23 @@ button:hover,
         #00d6f7 0%,
         #48faf1 100%
     );
+}
+
+.set-card:hover {
     background-color: #48faf1;
+}
+
+.set-card:hover::before {
+    background-size: 120%;
+    background-position: center;
+}
+
+.set-card:hover {
+    transform: scale(1.1);
+}
+
+.set-card:hover .logo {
+    transform: scale(1.2);
 }
 
 button:hover {
