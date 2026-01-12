@@ -168,6 +168,69 @@ if (moreSetsBtn) {
 }
 
 // -----------------------
+// Download
+// -----------------------
+
+document.getElementById("download").addEventListener("click", () => {
+  const data = localStorage.getItem("ownedCards");
+
+  if (!data) {
+    alert("No owned cards to export");
+    return;
+  }
+
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "ownedCards.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
+// -----------------------
+// Upload
+// -----------------------
+
+const importInput = document.getElementById("upload");
+
+document.getElementById("upload").addEventListener("click", () => {
+  importInput.click();
+});
+
+importInput.addEventListener("change", () => {
+  const file = importInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+
+      // Validación básica
+      if (typeof parsed !== "object" || Array.isArray(parsed)) {
+        throw new Error("Invalid file format");
+      }
+
+      localStorage.setItem("ownedCards", JSON.stringify(parsed));
+
+      // Refrescar UI
+      applyOwnedFilter();
+      alert("Owned cards imported successfully");
+
+    } catch (err) {
+      alert("Invalid JSON file");
+      console.error(err);
+    }
+  };
+
+  reader.readAsText(file);
+});
+
+// -----------------------
 // Inicializar
 // -----------------------
 document.addEventListener("DOMContentLoaded", () => {

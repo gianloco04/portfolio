@@ -19,23 +19,63 @@
         <h1 id="set-title"></h1>
         <div id="set-content">
             <div id="cards-container"></div>
-            <div class="set-controls">
-                <button id="toggle-opacity-btn">ALL</button>
+            <div id="set-controls">
+                <h2>FILTERS</h2>
+                <button id="toggle-opacity-btn" data-mode="ALL">ALL</button>
                 <div id="type-buttons-container">
-                    <button data-type="dark"><img src="Types/no-bg/dark.png" alt="dark"></button>
-                    <button data-type="fairy"><img src="Types/no-bg/fairy.png" alt="fairy"></button>
-                    <button data-type="fire"><img src="Types/no-bg/fire.png" alt="fire"></button>
-                    <button data-type="water"><img src="Types/no-bg/water.png" alt="water"></button>
-                    <button data-type="dragon"><img src="Types/no-bg/dragon.png" alt="water"></button>
-                    <button data-type="electric"><img src="Types/no-bg/electric.png" alt="water"></button>
-                    <button data-type="fighting"><img src="Types/no-bg/fighting.png" alt="water"></button>
-                    <button data-type="steel"><img src="Types/no-bg/steel.png" alt="water"></button>
-                    <button data-type="psychic"><img src="Types/no-bg/psychic.png" alt="water"></button>
-                    <button data-type="normal"><img src="Types/no-bg/normal.png" alt="water"></button>
-                    <button data-type="grass"><img src="Types/no-bg/grass.png" alt="water"></button>
-
+                    <button data-type="Colorless"><img src="Types/no-bg/Colorless.png" alt="normal"></button>
+                    <button data-type="Grass"><img src="Types/no-bg/Grass.png" alt="grass"></button>
+                    <button data-type="Water"><img src="Types/no-bg/Water.png" alt="water"></button>
+                    <button data-type="Fire"><img src="Types/no-bg/Fire.png" alt="fire"></button>
+                    <button data-type="Lightning"><img src="Types/no-bg/Lightning.png" alt="electric"></button>
+                    <button data-type="Fighting"><img src="Types/no-bg/Fighting.png" alt="fighting"></button>
+                    <button data-type="Psychic"><img src="Types/no-bg/Psychic.png" alt="psychic"></button>
+                    <button data-type="Metal"><img src="Types/no-bg/Metal.png" alt="steel"></button>
+                    <button data-type="Darkness"><img src="Types/no-bg/Darkness.png" alt="dark"></button>
+                    <button data-type="Fairy"><img src="Types/no-bg/Fairy.png" alt="fairy"></button>
+                    <button data-type="Dragon"><img src="Types/no-bg/Dragon.png" alt="dragon"></button>
                 </div>
+                <div class="dropdown-wrapper">
+                <select id="language-select" class="language-select">
+                    <option value="en">ENGLISH</option>
+                    <option value="es">SPANISH</option>
+                    <option value="fr">JAPANESE</option>
+                </select>
+                </div>
+                <button id="quickOwn">QUICK OWN</button>
+                <button id="delete">QUICK DELETE</button>
+            </div>
+            <div id="image-popup" class="popup hidden">
+                <div class="popup-inner">
+                    
+                    <!-- Navegación -->
+                    <button class="nav-btn prev"><i class="fa-solid fa-angle-left"></i></button>
 
+                    <!-- Imagen -->
+                    <img id="popup-image">
+
+                    <button class="nav-btn next"><i class="fa-solid fa-angle-right"></i></button>
+
+                    <!-- Info -->
+                    <div class="popup-info">
+                    <h2 id="card-name"></h2>
+                    <p><strong>Rarity:</strong> <span id="card-rarity"></span></p>
+
+                    <div class="owned-controls">
+                        <input type="number" id="card-copies" min="0" value="0">
+
+                        <div class="dropdown-wrapper">
+                            <select id="card-language" class="language-select">
+                                <option value="en">ENGLISH</option>
+                                <option value="es">SPANISH</option>
+                                <option value="fr">JAPANESE</option>
+                            </select>
+                        </div>
+
+                        <button id="save-card">OWNED</button>
+                    </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

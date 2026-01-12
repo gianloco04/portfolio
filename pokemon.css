@@ -83,7 +83,7 @@ header {
    MAIN / CONTENEDORES
 ======================= */
 main {
-    padding: 4rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     background: radial-gradient(
@@ -107,11 +107,12 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fill, 140px); /* columnas fijas */
     gap: 20px;
-    padding: 2rem;
-    width: 80%;
-    border-radius: 20px;
-    justify-content: center; /* centra las columnas si no llenan todo */
+    padding: 2.5rem 1rem;
+    width: 100%;
+    border-radius: 40px;
+    justify-content: center; 
     justify-items: center;
+    background: #fff;
 }
 
 
@@ -161,21 +162,19 @@ main {
     transition: all 0.2s ease-out;
 }
 
-
-.set-card.delete:hover {
-    background-color: #D94446;
-}
-
 /* =======================
    CARDS PAGE
 ======================= */
+
+
 
 #set-title {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 0 6rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    color: #444;
 }
 
 #set-title .set-logo {
@@ -194,11 +193,24 @@ main {
 }
 
 #set-controls {
+    background: #fff;
+    border-radius: 40px;;
     flex: 1;
     display: flex;
     flex-direction: column;
+    padding: 1rem; 
     gap: 20px;
-    align-items: flex-start;
+}
+
+#set-controls button {
+    margin: 0
+}
+
+#set-controls h2 {
+    text-align: center;
+    font-size: 1rem;
+    color: #444;
+    padding: 1rem 0 0 0;
 }
 
 .card {
@@ -217,7 +229,7 @@ main {
     max-width: 95%;
     max-height: 95%;
     object-fit: contain;
-    opacity: 0.5;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -225,25 +237,33 @@ main {
 }
 
 #type-buttons-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 columnas iguales */
+    gap: 10px; /* espacio entre botones */
+    justify-items: center;
+    align-items: center;
+    width: 100%
 }
-
+/* Estilo de los botones */
 #type-buttons-container button {
-    background: #fff;
-    padding: 0;
-    margin: 10px;
+    background: none;
+    width: 3rem;
+    aspect-ratio: 1/1;
+    border-radius: 0;
+    padding: 0.2rem;
 }
 
+/* Imagen dentro del botón */
 #type-buttons-container button img {
-    width: 15%;
-    height: 15%;
+    width: 100%; /* ajusta el tamaño de la imagen según tu diseño */
+    height: auto;
 }
+
 
 /* =======================
    BOTONES
 ======================= */
-button {
+button, .language-select {
     background: linear-gradient(
         110deg,
         #111111 0%,
@@ -263,29 +283,51 @@ button {
     cursor: pointer;
 }
 
-#add-remove-btn {
+#add-remove-btn, #download, #upload {
     padding: 1rem 1.25rem;
     width: auto;
 }
 
-#add-remove-btn.delete-mode {
+#add-remove-btn.delete-mode, .set-card.delete {
     background: linear-gradient(
         110deg,
         #D94446 0%,
         #FD5557 70%
     );
-    color: #111;
 }
 
-#add-remove-btn.add-mode {
-    background: #56db79;
+#add-remove-btn.add-mode, .set-card.add {
+    background: linear-gradient(
+        110deg,
+        #41e06c 0%,
+        #6efa93 100%
+    );
+}
+
+.dropdown-wrapper {
+    align-self: center;
+}
+
+.language-select {
+    appearance: none;
+    text-align: center;
+    margin: 0;
+}
+
+.language-select option {
+    background-color: #111;
+    padding: 1rem;
+}
+
+.language-select:focus {
+    outline: none;
 }
 
 /* =======================
    HOVER GENERAL
 ======================= */
 button:hover, 
-.inner-inner-circle:hover {
+.inner-inner-circle:hover, .language-select:hover {
     transform: scale(1.05);
     color: white;
     background: linear-gradient(
@@ -304,16 +346,12 @@ button:hover,
     background-position: center;
 }
 
-.set-card:hover {
+.set-card:hover, .button:hover {
     transform: scale(1.1);
 }
 
-.set-card:hover .logo {
+.set-card:hover .logo, #type-buttons-container button:hover {
     transform: scale(1.2);
-}
-
-button:hover {
-    transform: scale(1.02);
 }
 
 /* =======================
@@ -325,4 +363,109 @@ button:hover {
         padding: 0;
         gap: 20px;
     }
+}
+
+/* POP UP */
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+.popup img {
+  max-width: 85vw;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.popup-inner {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav-btn {
+  font-size: 24px;
+    aspect-ratio: 1/1;
+    width: 50%;
+    padding: 1rem;
+    background: #fff;
+    color: #333;
+}
+
+.popup-info {
+  background: #fff;
+  color: #333;
+  padding: 2rem;
+  border-radius: 50px;
+}
+
+.popup-info h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.owned-controls {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.owned-controls input {
+    padding: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    border-radius: 50px;
+    margin-bottom: 8px;
+    border: none;
+        background: linear-gradient(
+        110deg,
+        #00d6f7 0%,
+        #48faf1 100%
+    );
+    color: #fff;
+    font-weight: bold;
+}
+
+.owned-controls button {
+  margin-top: 8px;
+}
+
+@media (max-width: 1000px) {
+    main {
+        padding: 0;
+    }
+    #set-content {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #set-title {
+        justify-content: center;
+        margin: 1rem 0
+    }
+    #set-title h2{
+        display: none;  
+    }
+    #set-controls {
+        width: 90%;
+    }
+    #cards-container {
+        width: 90%
+    }
+
 }
