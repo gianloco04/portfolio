@@ -393,8 +393,13 @@ button:hover,
 .popup-inner {
   position: relative;
   display: flex;
-  gap: 24px;
   align-items: center;
+  gap: 2rem;
+}
+
+.card-nav {
+    display: flex;
+    gap: 1rem;
 }
 
 .nav-btn {
@@ -458,14 +463,41 @@ button:hover,
         justify-content: center;
         margin: 1rem 0
     }
-    #set-title h2{
+    #set-title h2, .popup-info p{
         display: none;  
     }
-    #set-controls {
+    #set-controls, #cards-container, #sets-container {
         width: 90%;
+        align-self: center;
+        background: none;
     }
-    #cards-container {
-        width: 90%
+    .cards-grid {
+        background: none;
+    }
+    .popup-inner {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: space-between;
+    }
+
+    .card-nav {
+        width: 70%;
+        justify-content: center;
+    }
+    .popup img {
+        width: 60%;
+        margin-top: 10vh;
+    }
+    button, input, .dropdown-wrapper, .language-select, .popup-info {
+        width: 100%;
+    }
+    .popup-info {
+        border-radius: 25px 25px 0 0;
+        justify-self: end;
+    }
+    .popup-info h2{
+        font-size: 1rem;
     }
 
 }
