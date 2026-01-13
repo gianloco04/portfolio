@@ -491,6 +491,7 @@ button:hover,
     }
     button, input, .dropdown-wrapper, .language-select, .popup-info {
         width: 100%;
+        text-align: center;
     }
     .popup-info {
         border-radius: 25px 25px 0 0;
