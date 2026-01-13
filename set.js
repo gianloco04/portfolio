@@ -222,6 +222,10 @@ function applyOwnedFilter() {
 // RENDERIZADO DE CARTAS
 // =======================
 
+function isVariant(card) {
+  return card.variant && card.variant !== "base";
+}
+
 function expandCardVariants(card) {
   if (!card.variants) return [{ ...card, variant: "base" }];
 
@@ -235,18 +239,32 @@ function expandCardVariants(card) {
 }
 
 function renderFilteredCards() {
-  renderedCards = masterSetActive
-    ? currentCards.flatMap(expandCardVariants)
-    : currentCards.map(card => ({ ...card, variant: "base" }));
+  const cardsContainer = document.getElementById("cards-container");
+  if (!cardsContainer) return;
 
-  const html = renderedCards.map(card => `
-    <div class="card" data-card-id="${card.id}" data-variant="${card.variant || 'base'}">
-      <img src="${card.image}/low.png" alt="${card.name}">
-    </div>
-  `).join("");
+  // Decidir qué cartas renderizar según Master/Base Set
+  if (masterSetActive) {
+    renderedCards = currentCards.flatMap(card => expandCardVariants(card));
+  } else {
+    renderedCards = currentCards.map(card => ({ ...card, variant: "base" }));
+  }
 
-  cardsContainer.innerHTML = `<div class="cards-grid">${html}</div>`;
+  const cardsHTML = renderedCards.map(card => {
+    // Brilla solo si estamos en Master Set y esta carta es variante real
+    const glowClass = masterSetActive && isVariant(card) ? "card-glow" : "";
+
+    return `
+      <div class="card ${glowClass}" 
+          data-card-id="${card.id}" 
+          data-variant="${card.variant || 'base'}">
+        <img src="${card.image}/low.png" alt="${card.name}">
+      </div>
+    `;
+  }).join("");
+
+  cardsContainer.innerHTML = `<div class="cards-grid">${cardsHTML}</div>`;
 }
+
 
 // =======================
 // CARGA DE SET

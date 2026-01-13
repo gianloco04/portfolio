@@ -113,6 +113,7 @@ main {
     justify-content: center; 
     justify-items: center;
     background: #fff;
+    box-shadow: var(--shadow);
 }
 
 
@@ -135,6 +136,8 @@ main {
     /* quitamos background-inline y lo pasamos a la variable */
     /* opcional: fondo de respaldo */
     background: white;
+    box-shadow: var(--shadow);
+
 }
 
 /* Pseudo-elemento para el background en B/N */
@@ -165,8 +168,6 @@ main {
 /* =======================
    CARDS PAGE
 ======================= */
-
-
 
 #set-title {
     display: flex;
@@ -200,6 +201,7 @@ main {
     flex-direction: column;
     padding: 1rem; 
     gap: 20px;
+    box-shadow: var(--shadow);
 }
 
 #set-controls button {
@@ -335,6 +337,7 @@ button:hover,
         #00d6f7 0%,
         #48faf1 100%
     );
+    box-shadow: var(--shadow);
 }
 
 .set-card:hover {
@@ -450,6 +453,48 @@ button:hover,
   margin-top: 8px;
 }
 
+/* Base de la carta */
+.card img {
+  display: block;
+  position: relative;
+}
+
+/* Solo cartas NO normales */
+.card:not([data-variant="normal"]) {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capa de brillo */
+.card:not([data-variant="normal"])::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.35) 55%,
+    transparent 70%
+  );
+  opacity: 0.4;
+  transform: translateX(-100%) rotate(10deg);
+  animation: foil-sweep 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Animación del brillo */
+@keyframes foil-sweep {
+  0% {
+    transform: translateX(-120%) rotate(10deg);
+  }
+  100% {
+    transform: translateX(120%) rotate(10deg);
+  }
+}
+
+
 @media (max-width: 1000px) {
     main {
         padding: 0;
@@ -459,17 +504,18 @@ button:hover,
         flex-direction: column-reverse;
         align-items: center;
     }
-    #set-title {
+    #set-title, .buttons {
         justify-content: center;
         margin: 1rem 0
     }
     #set-title h2, .popup-info p{
         display: none;  
     }
-    #set-controls, #cards-container, #sets-container {
+    #set-controls, #cards-container, #sets-container, .buttons, .cards-grid {
         width: 90%;
         align-self: center;
         background: none;
+        box-shadow: none;
     }
     .cards-grid {
         background: none;
@@ -489,7 +535,7 @@ button:hover,
         width: 60%;
         margin-top: 10vh;
     }
-    button, input, .dropdown-wrapper, .language-select, .popup-info {
+    button, input, .dropdown-wrapper, .language-select, .popup-info, .cards-grid {
         width: 100%;
         text-align: center;
     }
@@ -500,5 +546,4 @@ button:hover,
     .popup-info h2{
         font-size: 1rem;
     }
-
 }
