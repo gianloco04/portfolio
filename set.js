@@ -222,6 +222,29 @@ function applyOwnedFilter() {
 // RENDERIZADO DE CARTAS
 // =======================
 
+function logRenderedCardsDetailed() {
+  if (!renderedCards || renderedCards.length === 0) {
+    console.warn("No hay cartas renderizadas");
+    return;
+  }
+
+  console.group("🃏 Rendered cards (detailed)");
+
+  renderedCards.forEach((card, index) => {
+    console.group(`${index + 1}. ${card.id}`);
+
+    console.log("name:", card.name || "—");
+    console.log("variant:", card.variant || "base");
+    console.log("rarity:", card.rarity || "unknown");
+    console.log("localId:", card.localId || "—");
+
+    console.groupEnd();
+  });
+
+  console.groupEnd();
+}
+
+
 function isVariant(card) {
   return card.variant && card.variant !== "base";
 }
@@ -242,27 +265,29 @@ function renderFilteredCards() {
   const cardsContainer = document.getElementById("cards-container");
   if (!cardsContainer) return;
 
-  // Decidir qué cartas renderizar según Master/Base Set
   if (masterSetActive) {
+    // Expandir variantes
     renderedCards = currentCards.flatMap(card => expandCardVariants(card));
   } else {
     renderedCards = currentCards.map(card => ({ ...card, variant: "base" }));
   }
 
-  const cardsHTML = renderedCards.map(card => {
-    // Brilla solo si estamos en Master Set y esta carta es variante real
-    const glowClass = masterSetActive && isVariant(card) ? "card-glow" : "";
+  // ✅ Orden: por id, y dentro de cada id, normal primero
+  renderedCards.sort((a, b) => {
+    if (a.id !== b.id) return a.id.localeCompare(b.id);        // ordenar por id
+    if (a.variant === "normal") return -1;                    // normal primero
+    if (b.variant === "normal") return 1;
+    return 0;                                                 // el resto mantiene el orden
+  });
 
-    return `
-      <div class="card ${glowClass}" 
-          data-card-id="${card.id}" 
-          data-variant="${card.variant || 'base'}">
-        <img src="${card.image}/low.png" alt="${card.name}">
-      </div>
-    `;
-  }).join("");
+  const cardsHTML = renderedCards.map(card => `
+    <div class="card" data-card-id="${card.id}" data-variant="${card.variant || 'base'}">
+      <img src="${card.image}/low.png" alt="${card.name}">
+    </div>
+  `).join("");
 
   cardsContainer.innerHTML = `<div class="cards-grid">${cardsHTML}</div>`;
+logRenderedCardsDetailed()
 }
 
 

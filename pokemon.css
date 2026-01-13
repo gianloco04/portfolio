@@ -253,6 +253,7 @@ main {
     aspect-ratio: 1/1;
     border-radius: 0;
     padding: 0.2rem;
+    box-shadow: none;
 }
 
 /* Imagen dentro del botón */
@@ -478,19 +479,23 @@ button:hover,
     rgba(255, 255, 255, 0.35) 55%,
     transparent 70%
   );
-  opacity: 0.4;
+  opacity: 0.6;
   transform: translateX(-100%) rotate(10deg);
   animation: foil-sweep 2.5s linear infinite;
   pointer-events: none;
 }
 
+.card:not([data-variant="normal"]):hover {
+    filter: brightness(1.15);
+}
+
 /* Animación del brillo */
 @keyframes foil-sweep {
   0% {
-    transform: translateX(-120%) rotate(10deg);
+    transform: translateX(-100%) rotate(10deg);
   }
   100% {
-    transform: translateX(120%) rotate(10deg);
+    transform: translateX(100%) rotate(10deg);
   }
 }
 
