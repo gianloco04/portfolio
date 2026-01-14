@@ -605,4 +605,7 @@ button:hover,
     .card-pricing span {
         margin: 0;
     }
+    .top-div {
+        display: block;
+    }
 }
