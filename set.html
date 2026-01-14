@@ -16,7 +16,25 @@
         </div>
     </header>
     <main id="set-cards">
-        <h1 id="set-title"></h1>
+        <div class="top-div">
+            <h1 id="set-title"></h1>
+            <div class="overview-data">
+                <div class="overview-item">
+                    <span id="owned-percentage">0%</span>
+                    <small>Owned</small>
+                </div>
+
+                <div class="overview-item">
+                    <span id="owned-value">€0.00</span>
+                    <small>My collection</small>
+                </div>
+
+                <div class="overview-item">
+                    <span id="set-value">€0.00</span>
+                    <small>Set value</small>
+                </div>
+            </div>
+        </div>
         <div id="set-content">
             <div id="cards-container"></div>
             <div id="set-controls">
@@ -24,8 +42,8 @@
                 <button id="toggle-opacity-btn" data-mode="ALL">ALL</button>
                 <button id="master-set">MASTER SET</button>
                 <div id="type-buttons-container">
-                    <button data-type="Colorless"><img src="Types/no-bg/Colorless.png" alt="normal"></button>
-                    <button data-type="Grass"><img src="Types/no-bg/Grass1.png" alt="grass"></button>
+                    <button data-type="Colorless"><img src="pokemon/Types/" alt="normal"></button>
+                    <button data-type="Grass"><img src="Types/no-bg/Grass.png" alt="grass"></button>
                     <button data-type="Water"><img src="Types/no-bg/Water.png" alt="water"></button>
                     <button data-type="Fire"><img src="Types/no-bg/Fire.png" alt="fire"></button>
                     <button data-type="Lightning"><img src="Types/no-bg/Lightning.png" alt="electric"></button>
@@ -55,8 +73,7 @@
                     </div>
                     <div class="popup-info">
                     <h2 id="card-name"></h2>
-                    <p><strong>Rarity:</strong> <span id="card-rarity"></span></p>
-
+                    <div id="card-pricing" class="card-pricing"></div>
                     <div class="owned-controls">
                         <input type="number" id="card-copies" min="0" value="0">
 

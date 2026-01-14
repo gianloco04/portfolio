@@ -26,6 +26,134 @@ const deleteBtn = document.getElementById("delete");
 // UTILIDADES - Owned
 // =======================
 
+function getCardTrendPrice(card) {
+  const variant = card.variant || "normal";
+  const pricing = resolvePricing(card, variant);
+  return pricing?.trend || 0;
+}
+
+function resolvePricing(card, variant) {
+  const pricing = card.pricing?.cardmarket;
+  if (!pricing) return null;
+
+  const suffixPriority = {
+    reverse: ["-reverse", "-holo", ""],
+    holo: ["-holo", ""],
+    normal: [""],
+    base: [""]
+  };
+
+  const suffixes = suffixPriority[variant] || [""];
+
+  const isValid = (value) =>
+    value !== null && value !== undefined && value !== 0;
+
+  for (const suffix of suffixes) {
+    const trend = pricing[`trend${suffix}`];
+    if (isValid(trend)) {
+      return {
+        trend,
+        avg7: pricing[`avg7${suffix}`],
+        avg30: pricing[`avg30${suffix}`],
+        usedSuffix: suffix || "normal"
+      };
+    }
+  }
+
+  return null;
+}
+
+function renderPricing(card) {
+  const pricingEl = document.getElementById("card-pricing");
+  if (!pricingEl) return;
+
+  const variant = card.variant || "normal";
+  const prices = resolvePricing(card, variant);
+
+  if (!prices) {
+    pricingEl.textContent = "No price data";
+    return;
+  }
+
+  pricingEl.innerHTML = `
+    <div>Trend: <span>€${prices.trend.toFixed(2)}</div>
+    <div>7d: <span>€${prices.avg7?.toFixed(2) ?? "—"}</div>
+    <div>30d: <span>€${prices.avg30?.toFixed(2) ?? "—"}</div>
+  `;
+}
+
+function calculateOwnedPercentage() {
+  const owned = JSON.parse(localStorage.getItem("ownedCards")) || {};
+
+  const total = renderedCards.length;
+  if (total === 0) return 0;
+
+  let ownedCount = 0;
+
+  renderedCards.forEach(card => {
+    const variants = owned[card.id]?.variants;
+    if (!variants) return;
+
+    if (masterSetActive) {
+      // MASTER SET → variante concreta
+      if (variants[card.variant || "base"]?.copies > 0) {
+        ownedCount++;
+      }
+    } else {
+      // BASE SET → cualquier variante
+      if (Object.values(variants).some(v => v.copies > 0)) {
+        ownedCount++;
+      }
+    }
+  });
+
+  return Math.round((ownedCount / total) * 100);
+}
+
+function calculateOwnedValue() {
+  const owned = JSON.parse(localStorage.getItem("ownedCards")) || {};
+  let total = 0;
+
+  currentCards.forEach(card => {
+    const variants = owned[card.id]?.variants;
+    if (!variants) return;
+
+    Object.entries(variants).forEach(([variant, data]) => {
+      if (data.copies > 0) {
+        total += getCardTrendPrice({ ...card, variant });
+      }
+    });
+  });
+
+  return total;
+}
+
+function calculateSetValue() {
+  let total = 0;
+
+  currentCards.forEach(card => {
+    const variants = expandCardVariants(card);
+
+    variants.forEach(vCard => {
+      total += getCardTrendPrice(vCard);
+    });
+  });
+
+  return total;
+}
+
+function renderOverviewData() {
+  const ownedPercentageEl = document.getElementById("owned-percentage");
+  const ownedValueEl = document.getElementById("owned-value");
+  const setValueEl = document.getElementById("set-value");
+
+  if (!ownedPercentageEl) return;
+
+  ownedPercentageEl.textContent = `${calculateOwnedPercentage()}%`;
+  ownedValueEl.textContent = `€${calculateOwnedValue().toFixed(2)}`;
+  setValueEl.textContent = `€${calculateSetValue().toFixed(2)}`;
+}
+
 /**
  * Marca una carta como owned.
  * @param {Object} card - Carta completa
@@ -58,6 +186,7 @@ function setOwned(card, copies = 1, language = "en", mode = "variant") {
 
   localStorage.setItem("ownedCards", JSON.stringify(owned));
   applyOwnedFilter();
+  renderOverviewData();
 }
 
 /**
@@ -85,6 +214,7 @@ masterSetBtn.addEventListener("click", () => {
   masterSetBtn.textContent = masterSetActive ? "MASTER SET" : "BASE SET";
   renderFilteredCards();
   applyOwnedFilter();
+  renderOverviewData();
 });
 
 // Toggle OWNED / ALL
@@ -104,6 +234,7 @@ deleteBtn.addEventListener("click", () => {
 
   localStorage.setItem("ownedCards", JSON.stringify(owned));
   applyOwnedFilter();
+  renderOverviewData()
   alert(`Se han borrado las cartas del set actual (${currentCards.length})`);
 });
 
@@ -148,14 +279,14 @@ function openPopup(card) {
   if (!card) return;
   popup.classList.remove("hidden");
 
-  document.getElementById("popup-image").src = `${card.image}/high.png`;
-  document.getElementById("card-name").textContent = card.name;
-  document.getElementById("card-rarity").textContent = card.rarity || "—";
-  document.getElementById("card-illustrator").textContent = card.illustrator || "—";
-  document.getElementById("card-type").textContent = card.types?.join(", ") || "—";
-  document.getElementById("card-variant").textContent = card.variant || "base";
+  const variant = card.variant || "normal";
 
-  loadOwnedData(card.id, card.variant || "base");
+  document.getElementById("popup-image").src = `${card.image}/high.png`;
+  document.getElementById("card-name").textContent =
+    `${card.name} (${variant})`;
+
+  loadOwnedData(card.id, variant);
+  renderPricing(card);
 }
 
 // Cerrar popup al hacer click en overlay
@@ -335,6 +466,7 @@ async function loadSetPage() {
     currentCards = await enrichCardsWithVariants(currentCards);
     renderFilteredCards();
     applyOwnedFilter();
+    renderOverviewData();
 
   } catch (err) {
     console.error(err);
