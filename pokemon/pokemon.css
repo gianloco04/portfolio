@@ -607,5 +607,20 @@ button:hover,
     }
     .top-div {
         display: block;
+        margin-top: 0;
+        gap: 0;
+    }
+    .overview-data {
+        justify-content: center;
+    }
+    .overview-data span {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .overview-data small {
+        display: none;
+    }
+    #set-controls {
+        padding-top: 0;
     }
 }
