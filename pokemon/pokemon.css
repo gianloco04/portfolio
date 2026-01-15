@@ -92,6 +92,7 @@ main {
         #E9ECEF 35%,
         #DEE2E6 70%
     );
+    min-height: 100vh;
 }
 
 .sets-grid {
