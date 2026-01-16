@@ -148,15 +148,23 @@ button:hover {
     font-size: 5rem;
 }
 
+header {
+    transition: all 0.2s;
+}
+
+header:hover {
+    background: var(--black);
+}
+
+header:hover h1, header:hover h2, header:hover i {
+    color: #fff
+}
+
 #home main .left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-#home main .left img {
-    width: 100%;
 }
 
 /* --------------------------------- CONTENT --------------------------------- */
@@ -188,6 +196,10 @@ button:hover {
     color: var(--black);
     height: 2.5rem;
     transition: all 0.3s ease;
+}
+
+.skills-container img {
+    border-radius: 7px;
 }
 
 .skills-container i:hover, .skills-container img:hover {
@@ -239,6 +251,28 @@ button:hover {
 
 .project:hover h1 {
     color: var(--white)
+}
+
+@media (max-width: 1580px) {
+    #home h1 {
+        font-size: 6rem;
+    }
+}
+
+@media (max-width: 1360px) {
+    #home h1, h1 {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 1200px) {
+    #home h1 {
+        font-size: 3rem;
+    }
+    .skills-container i, .skills-container img {
+        font-size: 2rem;
+        height: 2rem;
+    }
 }
 
 @media (max-width: 800px) {
@@ -334,3 +368,4 @@ button:hover {
         display: none;
     }
 }
+
