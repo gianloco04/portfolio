@@ -278,7 +278,7 @@ button:hover {
         align-items: center;
     }
     #home main .right {
-        min-height: 50vh;
+        min-height: 45vh;
         z-index: -5;
         border-bottom: 1px solid var(--black);
         padding: 1rem;
@@ -323,10 +323,14 @@ button:hover {
 
     section .project .right {
         margin: 0;
+        justify-content: end;
     }
     section .project h1 {
         line-height: 2rem;
         font-size: 3rem;
-        text-align: left;
+        text-align: right;
+    }
+    .skills-container .fa-git-alt {
+        display: none;
     }
 }
