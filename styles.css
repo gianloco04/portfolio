@@ -274,6 +274,8 @@ button:hover {
     #home header .right {
         height: 25vh;
         padding: 2rem;
+        justify-content: center;
+        align-items: center;
     }
     #home main .right {
         min-height: 50vh;
@@ -317,5 +319,14 @@ button:hover {
     }
     #content {
         height: 100%;
+    }
+
+    section .project .right {
+        margin: 0;
+    }
+    section .project h1 {
+        line-height: 2rem;
+        font-size: 3rem;
+        text-align: left;
     }
 }
