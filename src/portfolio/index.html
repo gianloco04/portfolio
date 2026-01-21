@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Gianluca Cerchiai | Diseño Gráfico y Programación en Mallorca</title>
+    <meta name="description" content="Esta es la web personal de Gianluca. Aquí subo algunos de mis proyectos y podrás ver como contactar conmigo" />
+    <meta name="author" content="Gianluca Cerchiai" />
+    <link rel="icon" href="../img/cursor.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/ios-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Portfolio de Gianluca - Diseño Gráfico y programación en Mallorca" />
+    <meta property="og:description" content="Conóceme a través de esta web y contacta si quieres hacer algo conmigo" />
+    <meta property="og:url" content="https://gianludesign.com/" />
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.typekit.net/vvm2cym.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css" />
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q1CBDSV1V0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Q1CBDSV1V0');
+    </script>
+</head>
+<body>
+    <section id="home">
+        <header>
+            <div class="left"><h2 id="leftTitle">CD</h2></div>
+            <div class="right"><h1 id="typeit"></h1></div>
+        </header>
+        <main>
+            <div class="left">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel est reprehenderit fugiat sint amet voluptatem ullam nobis aliquam ex modi? Distinctio magni vel dolore? Quaerat ab perferendis veritatis unde rerum.</p>
+                <button>SEE FONT</button>
+            </div>
+            <div class="right">
+                <div class="top">
+                    <h3 id="contact"><a href="mailto:info@gianludesign.com">CONTACT</a></h3>
+
+                    <h3 href="">CV</h3>
+                </div>
+                <div class="bottom">
+                    <a href=".skills"><h3 data-id="me">SKILLS</h3></a>
+                    <h3 data-id="font">MY FONT</h3>
+                    <h3 data-id="contest23">MY PROJECTS</h3>
+                </div>
+            </div>
+        </main>
+    </section>
+    </section>
+    <section id="content" class="skills">
+        <header>
+            <div class="left left-alt">
+                <h1>MY SKILLS</h1>
+            </div>
+            <div class="right right-alt">
+                    <div class="skills-container flex center">
+                    <i class="fa-brands fa-html5"></i><i class="fa-brands fa-css3-alt"></i><i class="fa-brands fa-js"></i><i class="fa-brands fa-swift"></i><i class="fa-brands fa-php"></i><i class="fa-brands fa-python"></i><i class="fa-brands fa-git-alt"></i><img class="adobe-icon" src="img/adobe-bg.jpg" alt="">
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="left left-alt">
+                <div class="bottom">
+                    <h3>WEB & iOS DEVELOPMENT</h3>
+                    <h3>MICROSOFT OFFICE</h3>
+                    <h3>BUSINESS CENTRAL</h3>
+                    <h3>ADOBE SUIT</h3>
+                    <h3>DATABASES</h3>
+                </div>
+            </div>
+            <div class="right right-alt">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe incidunt officia natus cumque, itaque quae exercitationem neque harum ullam nemo modi hic animi, consectetur laudantium obcaecati voluptates. Aliquam, adipisci quasi.</p>
+            </div>
+        </main>
+    </section>
+    <section>
+    <a href="https://ceresdesign.gumroad.com/l/ceresfont" target="_blank" class="project-link">
+        <header class="project">
+        <div class="left"><h1>1</h1></div>
+        <div class="right"><h1>MY FONT</h1></div>
+        </header>
+    </a>
+    </section>
+
+    <section>
+    <a href="public/img/ilovepdf_merged.pdf" target="_blank" class="project-link">
+        <header class="project">
+        <div id="artjove" class="left"><h1>2</h1></div>
+        <div class="right"><h1>ART JOVE 2023</h1></div>
+        </header>
+    </a>
+    </section>
+
+    <section>
+    <a href="src/pokemon/pokemon.html" target="_blank" class="project-link">
+        <header class="project">
+        <div id="collection" class="left"><h1>3</h1></div>
+        <div class="right"><h1>MY COLLECTION</h1></div>
+        </header>
+    </a>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/typeit@8.7.1/dist/index.umd.js"></script>
+    <script>
+        new TypeIt("#typeit", {
+            strings: ["GIANLUCA CERCHIAI"],
+            speed: 120,
+            cursor: false,
+            breakLines: false,
+            loop: false,
+        }).go();
+    </script>
+</body>
+</html>
+
+
