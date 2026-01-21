@@ -12,21 +12,22 @@ export default function handler(req, res) {
     'Cerchiai-Bold': 'Cerchiai-Bold.woff2'
   };
 
-  // Si no es una fuente válida, devolvemos 404
-  if (!fonts[font]) {
+if (!fonts[font]) {
     return res.status(404).send('Fuente no encontrada');
   }
 
-  // Construimos la ruta al archivo dentro de /public/fonts
-  const filePath = path.join(process.cwd(), 'public/fonts', fonts[font]);
+  // Construimos la ruta al archivo dentro de la raíz (/fonts)
+  const filePath = path.join(process.cwd(), 'fonts', fonts[font]);
 
-  // Leemos el archivo
-  const fontData = fs.readFileSync(filePath);
+  try {
+    const fontData = fs.readFileSync(filePath);
 
-  // Headers: tipo de archivo y cache
-  res.setHeader('Content-Type', 'font/woff2');
-  res.setHeader('Cache-Control', 'public, max-age=31536000'); // cache 1 año
+    // Headers: tipo de archivo y cache
+    res.setHeader('Content-Type', 'font/woff2');
+    res.setHeader('Cache-Control', 'public, max-age=31536000'); // cache 1 año
 
-  // Enviamos el archivo
-  res.send(fontData);
+    res.send(fontData);
+  } catch (err) {
+    res.status(500).send('Error al leer la fuente');
+  }
 }
