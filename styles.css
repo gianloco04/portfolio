@@ -3,7 +3,7 @@
 /* Grosor Light */
 @font-face {
   font-family: 'Ceres';
-  src: url('/api/fonts/Cerchiai-Light') format('woff2');
+  src: url('./api/fonts/Cerchiai-Light') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -12,7 +12,7 @@
 /* Grosor Regular */
 @font-face {
   font-family: 'Ceres';
-  src: url('/api/fonts/Cerchiai-Regular') format('woff2');
+  src: url('./api/fonts/Cerchiai-Regular') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 /* Grosor Bold */
 @font-face {
   font-family: 'Ceres';
-  src: url('/api/fonts/Cerchiai-Bold') format('woff2');
+  src: url('./api/fonts/Cerchiai-Bold') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
