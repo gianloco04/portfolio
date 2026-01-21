@@ -44,7 +44,7 @@
 }
 
 body {
-    cursor: url('../../public/img/cursor.png')16 16, auto;
+    cursor: url('img/cursor.png')16 16, auto;
 }
 
 /* --------------------------------- SHORTCUTS --------------------------------- */
@@ -147,7 +147,7 @@ button:hover {
 }
 
 #home main .right {
-    background-image: url(../../public/img/ascii-art.png);
+    background-image: url(img/ascii-art.png);
     background-size: 70%;
     background-repeat: no-repeat;
     background-position: center bottom;
