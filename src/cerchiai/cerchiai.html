@@ -144,9 +144,8 @@
 
         .logo {
             font-family: var(--font-display);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.3em;
+            font-size: 40px;
+            font-weight: 300;
             text-decoration: none;
             color: var(--white);
         }
@@ -487,6 +486,11 @@
             position: relative;
         }
 
+        .alt-marquee-row {
+            background-color: var(--gray-100);
+            color: var(--gray-900);
+        }
+
         .marquee-row:last-child {
             border-bottom: none;
         }
@@ -534,6 +538,10 @@
             opacity: 0.12;
             transition: all 0.5s ease;
             cursor: default;
+        }
+
+        .alt-marquee-item {
+            opacity: 0.5;
         }
 
         .marquee-item:hover {
@@ -719,7 +727,6 @@
             pointer-events: none;
             z-index: 0;
             line-height: 0.8;
-            font-feature-settings: "ss01" 1;
         }
 
         .download-content {
@@ -772,7 +779,7 @@
         .feature-value {
             font-family: var(--font-display);
             font-size: 48px;
-            font-weight: 700;
+            font-weight: 300;
             line-height: 1;
             margin-bottom: 8px;
         }
@@ -808,7 +815,6 @@
         .btn-secondary {
             background: transparent;
             color: var(--black);
-            border: 1px solid var(--black);
         }
 
         .btn-secondary:hover {
@@ -890,6 +896,7 @@
         @media (max-width: 768px) {
             header {
                 padding: 24px;
+                justify-self: center;
             }
 
             nav {
@@ -916,16 +923,20 @@
 
             .tester-header {
                 flex-direction: column;
+                align-items: center;
                 gap: 32px;
             }
 
             .tester-controls {
-                align-items: flex-start;
+                align-items: center;
                 width: 100%;
             }
 
             .control-group {
                 flex-wrap: wrap;
+            }
+            .control-group .control-label {
+                display: none;
             }
 
             .download {
@@ -953,7 +964,7 @@
 <body>
     <!-- Header -->
     <header>
-        <a href="#" class="logo">CERCHIAI</a>
+        <a href="#" class="logo">cd</a>
         <nav>
             <a href="#showcase">Showcase</a>
             <a href="#tester">Probar</a>
@@ -1024,15 +1035,15 @@
         </div>
 
         <!-- Framed Glyphs - Cinematic with transparent fill effect -->
-        <div class="cinematic-showcase dark reveal framed-showcase">
+        <div class="cinematic-showcase dark reveal">
             <span class="cinematic-label">Framed Glyphs (ss01)</span>
-            <div class="cinematic-letters framed framed-effect">OUTLINE</div>
+            <div class="cinematic-letters framed">OUTLINE</div>
         </div>
 
         <!-- Framed Alternate with gradient background -->
-        <div class="cinematic-showcase light reveal framed-alt-showcase">
+        <div class="cinematic-showcase light reveal">
             <span class="cinematic-label">Alternate Framed (ss03)</span>
-            <div class="cinematic-letters alternate-framed framed-effect-dark">DISPLAY</div>
+            <div class="cinematic-letters alternate-framed">DISPLAY</div>
         </div>
 
     </section>
@@ -1044,101 +1055,101 @@
             <span class="marquee-row-label">Uppercase + Alternate (ss02)</span>
             <div class="marquee-track left">
                 <div class="marquee-content">
-                    <span class="marquee-item">TYPOGRAPHY</span>
-                    <span class="marquee-item alternate">TYPOGRAPHY</span>
-                    <span class="marquee-item">DESIGN</span>
-                    <span class="marquee-item alternate">DESIGN</span>
-                    <span class="marquee-item">CERCHIAI</span>
-                    <span class="marquee-item alternate">CERCHIAI</span>
+                    <span class="marquee-item">SOLID</span>
+                    <span class="marquee-item alternate">BOLD</span>
                     <span class="marquee-item">DISPLAY</span>
-                    <span class="marquee-item alternate">DISPLAY</span>
+                    <span class="marquee-item alternate">FONT</span>
+                    <span class="marquee-item">GLYPH</span>
+                    <span class="marquee-item alternate">ALT</span>
+                    <span class="marquee-item">ABC</span>
+                    <span class="marquee-item alternate">XYZ</span>
                 </div>
                 <div class="marquee-content">
-                    <span class="marquee-item">TYPOGRAPHY</span>
-                    <span class="marquee-item alternate">TYPOGRAPHY</span>
-                    <span class="marquee-item">DESIGN</span>
-                    <span class="marquee-item alternate">DESIGN</span>
+                    <span class="marquee-item">BOLD</span>
+                    <span class="marquee-item alternate">GLYPH</span>
+                    <span class="marquee-item">ALT</span>
+                    <span class="marquee-item alternate">XYZ</span>
                     <span class="marquee-item">CERCHIAI</span>
-                    <span class="marquee-item alternate">CERCHIAI</span>
-                    <span class="marquee-item">DISPLAY</span>
+                    <span class="marquee-item alternate">SOLID</span>
+                    <span class="marquee-item">ABC</span>
                     <span class="marquee-item alternate">DISPLAY</span>
                 </div>
             </div>
         </div>
 
-        <!-- Row 2: Lowercase + Numbers -->
+        <!-- Row 2: Framed Uppercase (ss01) + Framed Alternate (ss03) -->
+        <div class="marquee-row alt-marquee-row">
+            <span class="marquee-row-label">Framed (ss01) + Alt Framed (ss03)</span>
+            <div class="marquee-track left">
+                <div class="marquee-content">
+                    <span class="marquee-item alt-marquee-item framed">OUTLINE</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">OUTLINE</span>
+                    <span class="marquee-item alt-marquee-item framed">VISUAL</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">VISUAL</span>
+                    <span class="marquee-item alt-marquee-item framed">POSTER</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">POSTER</span>
+                    <span class="marquee-item alt-marquee-item framed">IMPACT</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">IMPACT</span>
+                </div>
+                <div class="marquee-content">
+                    <span class="marquee-item alt-marquee-item framed">OUTLINE</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">OUTLINE</span>
+                    <span class="marquee-item alt-marquee-item framed">VISUAL</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">VISUAL</span>
+                    <span class="marquee-item alt-marquee-item framed">POSTER</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">POSTER</span>
+                    <span class="marquee-item alt-marquee-item framed">IMPACT</span>
+                    <span class="marquee-item alt-marquee-item alternate-framed">IMPACT</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3: Lowercase + Numbers -->
         <div class="marquee-row">
             <span class="marquee-row-label">Lowercase + Numbers</span>
             <div class="marquee-track right">
                 <div class="marquee-content">
-                    <span class="marquee-item lowercase-item">typography</span>
-                    <span class="marquee-item lowercase-item">2025</span>
+                    <span class="marquee-item lowercase-item">types</span>
+                    <span class="marquee-item lowercase-item">2026</span>
                     <span class="marquee-item lowercase-item">cerchiai</span>
                     <span class="marquee-item lowercase-item">365</span>
                     <span class="marquee-item lowercase-item">display</span>
                     <span class="marquee-item lowercase-item">font</span>
-                    <span class="marquee-item lowercase-item">2024</span>
+                    <span class="marquee-item lowercase-item">art</span>
                 </div>
                 <div class="marquee-content">
                     <span class="marquee-item lowercase-item">typography</span>
-                    <span class="marquee-item lowercase-item">2025</span>
+                    <span class="marquee-item lowercase-item">2026</span>
                     <span class="marquee-item lowercase-item">cerchiai</span>
                     <span class="marquee-item lowercase-item">365</span>
                     <span class="marquee-item lowercase-item">display</span>
                     <span class="marquee-item lowercase-item">font</span>
-                    <span class="marquee-item lowercase-item">2024</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Row 3: Framed Uppercase (ss01) + Framed Alternate (ss03) -->
-        <div class="marquee-row">
-            <span class="marquee-row-label">Framed (ss01) + Alt Framed (ss03)</span>
-            <div class="marquee-track left">
-                <div class="marquee-content">
-                    <span class="marquee-item framed">OUTLINE</span>
-                    <span class="marquee-item alternate-framed">OUTLINE</span>
-                    <span class="marquee-item framed">VISUAL</span>
-                    <span class="marquee-item alternate-framed">VISUAL</span>
-                    <span class="marquee-item framed">POSTER</span>
-                    <span class="marquee-item alternate-framed">POSTER</span>
-                    <span class="marquee-item framed">IMPACT</span>
-                    <span class="marquee-item alternate-framed">IMPACT</span>
-                </div>
-                <div class="marquee-content">
-                    <span class="marquee-item framed">OUTLINE</span>
-                    <span class="marquee-item alternate-framed">OUTLINE</span>
-                    <span class="marquee-item framed">VISUAL</span>
-                    <span class="marquee-item alternate-framed">VISUAL</span>
-                    <span class="marquee-item framed">POSTER</span>
-                    <span class="marquee-item alternate-framed">POSTER</span>
-                    <span class="marquee-item framed">IMPACT</span>
-                    <span class="marquee-item alternate-framed">IMPACT</span>
+                    <span class="marquee-item lowercase-item">art</span>
                 </div>
             </div>
         </div>
 
         <!-- Row 4: Lowercase Framed (ss01) + Numbers -->
-        <div class="marquee-row">
+        <div class="marquee-row alt-marquee-row">
             <span class="marquee-row-label">Lowercase Framed (ss01) + Numbers</span>
             <div class="marquee-track right">
                 <div class="marquee-content">
-                    <span class="marquee-item framed lowercase-item">typography</span>
-                    <span class="marquee-item framed lowercase-item">2025</span>
-                    <span class="marquee-item framed lowercase-item">cerchiai</span>
-                    <span class="marquee-item framed lowercase-item">365</span>
-                    <span class="marquee-item framed lowercase-item">display</span>
-                    <span class="marquee-item framed lowercase-item">font</span>
-                    <span class="marquee-item framed lowercase-item">2024</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">typography</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">2026</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">cerchiai</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">365</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">display</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">font</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">art</span>
                 </div>
                 <div class="marquee-content">
-                    <span class="marquee-item framed lowercase-item">typography</span>
-                    <span class="marquee-item framed lowercase-item">2025</span>
-                    <span class="marquee-item framed lowercase-item">cerchiai</span>
-                    <span class="marquee-item framed lowercase-item">365</span>
-                    <span class="marquee-item framed lowercase-item">display</span>
-                    <span class="marquee-item framed lowercase-item">font</span>
-                    <span class="marquee-item framed lowercase-item">2024</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">typography</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">2026</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">cerchiai</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">365</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">display</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">font</span>
+                    <span class="marquee-item alt-marquee-item framed lowercase-item">art</span>
                 </div>
             </div>
         </div>
@@ -1195,8 +1206,7 @@
             <p class="download-label">Free Download</p>
             <h2 class="download-title">CERCHIAI</h2>
             <p class="download-subtitle">
-                Una tipografia display experimental con multiples sets de glifos. 
-                Perfecta para titulos, posters y proyectos creativos.
+                A perfect display font for poster and logo design
             </p>
             <div class="download-features">
                 <div class="feature">
@@ -1213,8 +1223,9 @@
                 </div>
             </div>
             <div class="download-buttons">
-                <a href="#tester" class="btn btn-secondary">Probar Fuente</a>
-                <a href="#" class="btn">Comprar Fuente</a>
+                <a href="#tester" class="btn btn-secondary">Licence</a>
+                <a href="#tester" class="btn btn-secondary">Free Test</a>
+                <a href="#" class="btn">Buy Font</a>
             </div>
         </div>
     </section>
