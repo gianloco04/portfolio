@@ -12,7 +12,7 @@
 /* Grosor Regular */
 @font-face {
   font-family: '__2';
-  src: url('fonts/__2') format('woff2');
+  src: url('fonts/__2.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -21,7 +21,7 @@
 /* Grosor Bold */
 @font-face {
   font-family: '__3';
-  src: url('fonts/__3') format('woff2');
+  src: url('fonts/__3.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -101,8 +101,8 @@ h1 {
 }
 
 h2 {
-    font-family: '__1', sans-serif;
-    font-size: 11rem;
+    font-family: '__3', sans-serif;
+    font-size: 9rem;
     font-weight: lighter;
     line-height: 5rem;
     margin-right: 3rem;

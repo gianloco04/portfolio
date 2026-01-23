@@ -1,0 +1,116 @@
+@font-face {
+  font-family: '__1';
+  src: url('../../fonts/__1.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Grosor Regular */
+@font-face {
+  font-family: '__2';
+  src: url('../../fonts/__2.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Grosor Bold */
+@font-face {
+  font-family: '__3';
+  src: url('../../fonts/__3.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+    --black: #212121;
+    --white: #ffffff;
+}
+
+::selection {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    cursor: url('img/cursor.png')16 16, auto;
+}
+
+/* --------------------------------- SHORTCUTS --------------------------------- */
+
+section {
+    border-bottom: 1px solid var(--black);
+    height: 100%;
+}
+
+header {
+    display: flex;
+    height: 25vh;
+    width: 100%;
+    border-bottom: 1px solid var(--black);
+}
+
+main {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.left {
+    height: 100%;
+    width: 25%;
+    border-right: 1px solid var(--black);
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.right {
+    display: flex;
+    height: 100%;
+    width: 75%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+main .left, main .right {
+    padding: 2rem;
+}
+
+h2 {
+    font-family: '__3', sans-serif;
+    font-size: 9rem;
+    font-weight: lighter;
+    line-height: 5rem;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+    color: var(--black);
+}
+
+/* HOME */
+
+#home main h2 {
+    font-size: 32rem;
+    line-height: 6rem;
+    margin: 0;
+    z-index: -1;
+}
+
+#home main .right {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#testing {
+    background: #ffffff;
+}
