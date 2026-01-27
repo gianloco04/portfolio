@@ -458,7 +458,7 @@
 
         .cinematic-letters {
             font-family: var(--font-display);
-            font-size: clamp(150px, 20vw, 500px);
+            font-size: clamp(100px, 20vw, 500px);
             font-weight: 400;
             line-height: 0.85;
             text-align: center;
@@ -747,7 +747,7 @@
 
         .download-title {
             font-family: var(--font-display);
-            font-size: clamp(80px, 15vw, 200px);
+            font-size: clamp(60px, 15vw, 200px);
             font-weight: 400;
             line-height: 0.85;
             margin-bottom: 32px;
@@ -863,8 +863,193 @@
             transition: opacity 0.3s ease;
         }
 
-        .footer-links a:hover {
+.footer-links a:hover {
             opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--white);
+            color: var(--black);
+            padding: 64px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9) translateY(30px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-close::before,
+        .modal-close::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background: var(--black);
+        }
+
+        .modal-close::before {
+            transform: rotate(45deg);
+        }
+
+        .modal-close::after {
+            transform: rotate(-45deg);
+        }
+
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 48px;
+            font-weight: 400;
+            margin-bottom: 16px;
+        }
+
+        .modal-subtitle {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 12px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 0;
+            font-family: var(--font-body);
+            font-size: 16px;
+            border: none;
+            border-bottom: 1px solid var(--gray-300);
+            background: transparent;
+            color: var(--black);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-bottom-color: var(--black);
+        }
+
+        .form-input::placeholder {
+            color: var(--gray-400);
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .form-success {
+            text-align: center;
+            display: none;
+        }
+
+        .form-success.active {
+            display: block;
+        }
+
+        .form-success-icon {
+            width: 64px;
+            height: 64px;
+            border: 2px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+
+        .form-success-icon::before {
+            content: '';
+            width: 24px;
+            height: 12px;
+            border-left: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
+            transform: rotate(-45deg) translateY(-2px);
+        }
+
+        .form-success-title {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+
+        .form-success-text {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        .demo-form.hidden {
+            display: none;
+        }
+
+        /* Color Shift Animation for Framed text */
+        @keyframes colorShift {
+            0% { color: #ff6b6b; }
+            16% { color: #ffd93d; }
+            33% { color: #6bcb77; }
+            50% { color: #4d96ff; }
+            66% { color: #9b59b6; }
+            83% { color: #ff6b9d; }
+            100% { color: #ff6b6b; }
+        }
+
+        .color-shift {
+            animation: colorShift 8s ease-in-out infinite;
         }
 
         /* Responsive */
@@ -934,6 +1119,7 @@
 
             .control-group {
                 flex-wrap: wrap;
+                justify-content: center;
             }
             .control-group .control-label {
                 display: none;
@@ -967,8 +1153,8 @@
         <a href="#" class="logo">cd</a>
         <nav>
             <a href="#showcase">Showcase</a>
-            <a href="#tester">Probar</a>
-            <a href="#download">Descargar</a>
+            <a href="#tester">Test</a>
+            <a href="#download">Download</a>
         </nav>
     </header>
 
@@ -1043,7 +1229,7 @@
         <!-- Framed Alternate with gradient background -->
         <div class="cinematic-showcase light reveal">
             <span class="cinematic-label">Alternate Framed (ss03)</span>
-            <div class="cinematic-letters alternate-framed">DISPLAY</div>
+            <div class="cinematic-letters alternate-framed color-shift">OUTLINE</div>
         </div>
 
     </section>
@@ -1173,7 +1359,7 @@
                 </div>
                 <div class="control-group">
                     <span class="control-label">Variant</span>
-                    <button class="control-btn variant-btn active" data-variant="standard">Uppercase</button>
+                    <button class="control-btn variant-btn active" data-variant="standard">Standard</button>
                     <button class="control-btn variant-btn" data-variant="alternate">Alternate</button>
                     <button class="control-btn variant-btn" data-variant="framed">Framed</button>
                     <button class="control-btn variant-btn" data-variant="alternate-framed">Alt Framed</button>
@@ -1203,7 +1389,7 @@
     <section class="download" id="download">
         <div class="download-bg">C</div>
         <div class="download-content">
-            <p class="download-label">Free Download</p>
+            <p class="download-label">Download</p>
             <h2 class="download-title">CERCHIAI</h2>
             <p class="download-subtitle">
                 A perfect display font for poster and logo design
@@ -1223,16 +1409,62 @@
                 </div>
             </div>
             <div class="download-buttons">
-                <a href="#tester" class="btn btn-secondary">Free Demo</a>
+                <button class="btn btn-secondary" id="freeDemoBtn">Free Demo</button>
                 <a href="#" class="btn">Buy Font</a>
             </div>
         </div>
     </section>
 
+<!-- Demo Modal -->
+    <div class="modal-overlay" id="demoModal">
+        <div class="modal">
+            <button class="modal-close" id="closeModal" aria-label="Cerrar"></button>
+            
+            <div class="demo-form" id="demoForm">
+                <h3 class="modal-title">free demo</h3>
+                <p class="modal-subtitle">Where would you like to receive your free demo?</p>
+                
+                <form id="demoFormSubmit">
+                    <div class="form-group">
+                        <label class="form-label" for="userName">Name</label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="userName" 
+                            name="name"
+                            placeholder="Your Name"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="userEmail">Email</label>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="userEmail" 
+                            name="email"
+                            placeholder="your@email.com"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="btn form-submit">Send</button>
+                </form>
+            </div>
+            
+            <div class="form-success" id="formSuccess">
+                <div class="form-success-icon"></div>
+                <h3 class="form-success-title">thanks</h3>
+                <p class="form-success-text">Check your inbox!</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <span class="footer-text">CERCHIAI FONT 2025</span>
+            <span class="footer-text">CERCHIAI FONT 2026</span>
             <div class="footer-links">
                 <a href="#">Instagram</a>
                 <a href="#">Behance</a>
@@ -1438,9 +1670,65 @@
 
         revealElements.forEach(el => revealObserver.observe(el));
 
-        // Initialize
+// Initialize
         updateTesterStyles();
         adjustFontSize(heroInput, 28, 6, 3);
+
+        // Modal functionality
+        const demoModal = document.getElementById('demoModal');
+        const freeDemoBtn = document.getElementById('freeDemoBtn');
+        const closeModalBtn = document.getElementById('closeModal');
+        const demoFormElement = document.getElementById('demoForm');
+        const demoFormSubmit = document.getElementById('demoFormSubmit');
+        const formSuccess = document.getElementById('formSuccess');
+
+        function openModal() {
+            demoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            demoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset form after modal closes
+            setTimeout(() => {
+                demoFormElement.classList.remove('hidden');
+                formSuccess.classList.remove('active');
+                demoFormSubmit.reset();
+            }, 400);
+        }
+
+        freeDemoBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close modal on overlay click
+        demoModal.addEventListener('click', function(e) {
+            if (e.target === demoModal) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && demoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Form submission
+        demoFormSubmit.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            
+            // Here you would typically send this data to your server
+            console.log('Demo requested:', { name, email });
+            
+            // Show success message
+            demoFormElement.classList.add('hidden');
+            formSuccess.classList.add('active');
+        });
     </script>
 </body>
 </html>

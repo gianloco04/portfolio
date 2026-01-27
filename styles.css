@@ -3,7 +3,7 @@
 /* Grosor Light */
 @font-face {
   font-family: '__1';
-  src: url('fonts/__1.woff2') format('woff2');
+  src: url('fonts/Cerchiai-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -101,7 +101,7 @@ h1 {
 }
 
 h2 {
-    font-family: '__3', sans-serif;
+    font-family: '__1', sans-serif;
     font-size: 9rem;
     font-weight: lighter;
     line-height: 5rem;
@@ -114,8 +114,8 @@ h3 {
     font-family: 'neue-haas-grotesk-display', sans-serif;
     font-weight: 800;
     color: var(--black);
-    font-size: 4rem;
-    line-height: 3.5rem;
+    font-size: 3rem;
+    line-height: 2.75rem;
     transition: all 0.3s ease;
 }
 
@@ -166,7 +166,7 @@ button:hover {
 }
 
 #home h3:hover {
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 header {
